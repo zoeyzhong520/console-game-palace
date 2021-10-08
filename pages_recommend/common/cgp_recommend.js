@@ -85,12 +85,14 @@ export const cgp_recommend_banner_list = function(Bmob) {
 }
 
 // 获取全部推荐数据
-export const cgp_recommend_all_list = function(Bmob) {
+export const cgp_recommend_all_list = function(Bmob, page) {
 	return new Promise((resolve, reject) => {
 
 		const query = Bmob.Query('CGP_HotRecommend')
 		// 对createdAt字段降序排列
 		query.order("-createdAt")
+		query.limit(10)
+		query.skip(page*10)
 		query.find().then(res => {
 			// console.log(res)
 			resolve(res)
@@ -104,7 +106,7 @@ export const cgp_recommend_all_list = function(Bmob) {
  * @param  {String} index    tabs 对应的下标
  * @return {Array}           查询的结果
  */
-export const cgp_recommend_query_list = function(Bmob, index) {
+export const cgp_recommend_query_list = function(Bmob, index, page) {
 	return new Promise((resolve, reject) => {
 		
 		if (cgp_recommend_types[index] == 'ALL') {
@@ -113,6 +115,8 @@ export const cgp_recommend_query_list = function(Bmob, index) {
 		
 		const query = Bmob.Query('CGP_HotRecommend')
 		query.equalTo("type", "==", cgp_recommend_types[index])
+		query.limit(10)
+		query.skip(page*10)
 		query.find().then(res => {
 			// console.log(res)
 			resolve(res)
