@@ -1,0 +1,41 @@
+
+page {
+	background-color: #f5f6f7;
+}
+
+@charset "utf-8";
+.articles-container {
+	display: flex;
+	flex-direction: column;
+	padding: 20rpx 0;
+	margin-left: 30rpx;
+	margin-right: 30rpx;
+}
+.articles-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 16rpx;
+	background: #FFFFFF;
+	box-shadow: 0px 2rpx 6rpx 0px rgba(0, 0, 0, 0.04);
+	margin-bottom: 30rpx;
+	padding-bottom: 30rpx;
+}
+.articles-image {
+	width: 100%;
+	height: 300rpx;
+	border-top-left-radius: 8rpx;
+	border-top-right-radius: 8rpx;
+}
+.articles-title {
+	font-size: 30rpx;
+	line-height: 42rpx;
+	font-weight: bold;
+	color: #333333;
+	width: 630rpx;
+	margin-top: 30rpx;
+	
+	/* 开启换行 */
+	word-wrap: break-word;
+}
+

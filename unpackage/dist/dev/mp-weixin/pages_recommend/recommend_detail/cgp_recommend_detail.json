@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "游戏详情",
+  "usingComponents": {
+    "u-section": "/uview-ui/components/u-section/u-section",
+    "u-lazy-load": "/uview-ui/components/u-lazy-load/u-lazy-load",
+    "u-parse": "/uview-ui/components/u-parse/u-parse",
+    "u-gap": "/uview-ui/components/u-gap/u-gap",
+    "u-link": "/uview-ui/components/u-link/u-link"
+  }
+}

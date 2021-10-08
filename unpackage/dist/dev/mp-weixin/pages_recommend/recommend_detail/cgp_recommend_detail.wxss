@@ -1,0 +1,32 @@
+@charset "utf-8";
+.recommend-detail-container {
+	display: flex;
+	flex-direction: column;
+	padding: 30rpx;
+}
+.recommend-detail-box {
+	display: flex;
+	flex-direction: column;
+	padding: 30rpx 0;
+	position: relative;
+}
+.recommend-detail-title {
+	font-size: 50rpx;
+	line-height: 70rpx;
+	color: #333333;
+	font-weight: bold;
+	width: 690rpx;
+
+	/* 开启换行 */
+	word-wrap: break-word;
+}
+.recommend-detail-description {
+	font-size: 36rpx;
+	line-height: 68rpx;
+	color: #333333;
+	width: 690rpx;
+
+	/* 开启换行 */
+	word-wrap: break-word;
+}
+

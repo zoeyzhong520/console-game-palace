@@ -1,0 +1,13 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "u-navbar": "/uview-ui/components/u-navbar/u-navbar",
+    "u-search": "/uview-ui/components/u-search/u-search",
+    "u-tabs": "/uview-ui/components/u-tabs/u-tabs",
+    "u-popup": "/uview-ui/components/u-popup/u-popup",
+    "u-gap": "/uview-ui/components/u-gap/u-gap",
+    "u-grid": "/uview-ui/components/u-grid/u-grid",
+    "u-grid-item": "/uview-ui/components/u-grid-item/u-grid-item",
+    "u-swiper": "/uview-ui/components/u-swiper/u-swiper"
+  }
+}

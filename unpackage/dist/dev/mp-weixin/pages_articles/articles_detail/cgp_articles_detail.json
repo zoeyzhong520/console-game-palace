@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "文章详情",
+  "usingComponents": {
+    "u-parse": "/uview-ui/components/u-parse/u-parse",
+    "u-link": "/uview-ui/components/u-link/u-link"
+  }
+}

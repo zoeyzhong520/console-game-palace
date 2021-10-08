@@ -1,0 +1,91 @@
+{
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/recommend/cgp_recommend",
+			"style": {
+				"navigationStyle":"custom"
+			}
+		},
+		{
+			"path": "pages/articles/cgp_articles",
+			"style": {
+				"navigationBarTitleText": "热门文章",
+				"enablePullDownRefresh":true
+			}
+		}
+	],
+	
+	"subPackages": [
+		{
+			"root":"pages_articles",
+			"pages": [
+				{
+					"path":"articles_detail/cgp_articles_detail",
+					"style": {
+						"navigationBarTitleText":"文章详情"
+					}
+				}
+			]
+		},
+		{
+			"root":"pages_recommend",
+			"pages": [
+				{
+					"path":"recommend_detail/cgp_recommend_detail",
+					"style": {
+						"navigationBarTitleText":"游戏详情"
+					}
+				},
+				{
+					"path":"recommend_search/cgp_recommend_search",
+					"style": {
+						"navigationBarTitleText":"搜索"
+					}
+				}
+			]
+		}
+	],
+	
+	"preloadRule": {
+		"pages_articles/articles_detail/cgp_articles_detail": {
+			"network": "all",
+			"packages": ["__APP__"]
+		},
+		"pages_recommend/recommend_detail/cgp_recommend_detail": {
+			"network": "all",
+			"packages": ["__APP__"]
+		},
+		"pages_recommend/recommend_search/cgp_recommend_search": {
+			"network": "all",
+			"packages": ["__APP__"]
+		}
+	},
+	
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color":"#c0c4cc",
+		"selectedColor":"#2979ff",
+		"list": [
+			{
+				"pagePath": "pages/recommend/cgp_recommend",
+				"iconPath": "static/tabBar/recommend.jpeg",
+				"selectedIconPath": "static/tabBar/recommend-filling.jpeg",
+				"text": "游戏推荐"
+			},
+			{
+				"pagePath": "pages/articles/cgp_articles",
+				"iconPath": "static/tabBar/articles.jpeg",
+				"selectedIconPath": "static/tabBar/articles-filling.jpeg",
+				"text": "热门文章"
+			}
+		]
+	}
+}

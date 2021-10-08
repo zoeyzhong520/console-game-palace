@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/recommend/cgp_recommend",
+    "pages/articles/cgp_articles"
+  ],
+  "subPackages": [
+    {
+      "root": "pages_articles",
+      "pages": [
+        "articles_detail/cgp_articles_detail"
+      ]
+    },
+    {
+      "root": "pages_recommend",
+      "pages": [
+        "recommend_detail/cgp_recommend_detail",
+        "recommend_search/cgp_recommend_search"
+      ]
+    }
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#c0c4cc",
+    "selectedColor": "#2979ff",
+    "list": [
+      {
+        "pagePath": "pages/recommend/cgp_recommend",
+        "iconPath": "static/tabBar/recommend.jpeg",
+        "selectedIconPath": "static/tabBar/recommend-filling.jpeg",
+        "text": "游戏推荐"
+      },
+      {
+        "pagePath": "pages/articles/cgp_articles",
+        "iconPath": "static/tabBar/articles.jpeg",
+        "selectedIconPath": "static/tabBar/articles-filling.jpeg",
+        "text": "热门文章"
+      }
+    ]
+  },
+  "preloadRule": {
+    "pages_articles/articles_detail/cgp_articles_detail": {
+      "network": "all",
+      "packages": [
+        "__APP__"
+      ]
+    },
+    "pages_recommend/recommend_detail/cgp_recommend_detail": {
+      "network": "all",
+      "packages": [
+        "__APP__"
+      ]
+    },
+    "pages_recommend/recommend_search/cgp_recommend_search": {
+      "network": "all",
+      "packages": [
+        "__APP__"
+      ]
+    }
+  },
+  "usingComponents": {}
+}
