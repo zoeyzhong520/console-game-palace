@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "热门文章",
   "enablePullDownRefresh": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "u-no-network": "/uview-ui/components/u-no-network/u-no-network"
+  }
 }

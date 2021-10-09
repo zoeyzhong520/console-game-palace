@@ -8,6 +8,8 @@
 			<!-- 标题 -->
 			<text class="articles-title">{{ item.title }}</text>
 		</view>
+		<!-- NoNetwork 无网络提示 -->
+		<u-no-network></u-no-network>
 	</view>
 </template>
 
@@ -20,7 +22,9 @@
 		data() {
 			return {
 				// 热门文章列表数据
-				list: []
+				list: [],
+				// 分页加载的页码
+				page: 0,
 			}
 		},
 		
@@ -34,6 +38,22 @@
 					url:'../../pages_articles/articles_detail/cgp_articles_detail?detailInfo=' + encodeURIComponent(JSON.stringify(item))
 				})
 			},
+			
+			// 刷新数据
+			refreshData(isLoadMore) {
+				isLoadMore ? this.page ++ : this.page = 0
+				
+				// 获取热门文章列表
+				cgp_popular_articles_list(this.Bmob,this.page).then((res) => {
+					uni.stopPullDownRefresh()
+					
+					if (this.page == 0) {
+						this.list = res
+					} else {
+						this.list = this.list.concat(res)
+					}
+				})
+			},
 		},
 		
 		onShareAppMessage() {
@@ -43,12 +63,11 @@
 		},
 		
 		onPullDownRefresh() {
-			// 获取热门文章列表
-			cgp_popular_articles_list(this.Bmob).then((res) => {
-				uni.stopPullDownRefresh()
-				
-				this.list = res
-			})
+			this.refreshData()
+		},
+		
+		onReachBottom() {
+			this.refreshData(true)
 		},
 	}
 </script>

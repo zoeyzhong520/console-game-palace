@@ -42,6 +42,8 @@
 				</view>
 			</view>
 		</view>
+		<!-- NoNetwork 无网络提示 -->
+		<u-no-network></u-no-network>
 	</view>
 </template>
 
@@ -104,31 +106,31 @@
 				statusNavBarH: 0,
 				// 当前页数【字典元素分别对应不同标签】
 				pages: {
-					ALL: 1,
+					ALL: 0,
 					
-					A: 1,
-					B: 1,
-					C: 1,
+					A: 0,
+					B: 0,
+					C: 0,
 					
-					D: 1,
-					E: 1,
-					F: 1,
+					D: 0,
+					E: 0,
+					F: 0,
 					
-					G: 1,
-					H: 1,
-					I: 1,
+					G: 0,
+					H: 0,
+					I: 0,
 					
-					J: 1,
-					K: 1,
-					L: 1,
+					J: 0,
+					K: 0,
+					L: 0,
 					
-					M: 1,
-					N: 1,
-					O: 1,
+					M: 0,
+					N: 0,
+					O: 0,
 					
-					P: 1,
-					Q: 1,
-					R: 1
+					P: 0,
+					Q: 0,
+					R: 0
 				},
 				// 记录每个标签的滚动位置
 				pageScrollArr: {
@@ -170,11 +172,15 @@
 			
 			// 获取广告位数据
 			cgp_recommend_banner_list(this.Bmob).then((res) => {
+				uni.stopPullDownRefresh()
+				
 				this.bannerList = res
 			})
 			
 			// 获取全部推荐数据
 			cgp_recommend_all_list(this.Bmob,0).then((res) => {
+				uni.stopPullDownRefresh()
+				
 				this.list = res
 				this.allData.ALL = res
 			})
@@ -236,9 +242,52 @@
 				
 				// 筛选数据
 				cgp_recommend_query_list(this.Bmob,index,0).then((res) => {
+					uni.stopPullDownRefresh()
+					
 					this.list = res
 					this.allData[type] = this.list
 				})
+			},
+			
+			// 刷新数据
+			// isLoadMore 是否是加载更多
+			refreshData(isLoadMore) {
+				var type = cgp_recommend_types[this.current]
+				var page = this.pages[type]
+				isLoadMore ? page ++ : page = 0
+				// console.log(page)
+				this.pages[type] = page
+				
+				if (this.current == 0) {
+					// 获取全部推荐数据
+					cgp_recommend_all_list(this.Bmob,page).then((res) => {
+						uni.stopPullDownRefresh()
+						
+						if (page == 0) {
+							this.list = res
+						} else {
+							this.list = this.list.concat(res)
+						}
+						
+						this.allData.ALL = this.list
+					})
+					return
+				}
+				
+				if (this.current > 0) {
+					// 筛选数据
+					cgp_recommend_query_list(this.Bmob,this.current,page).then((res) => {
+						uni.stopPullDownRefresh()
+						
+						if (page == 0) {
+							this.list = res
+						} else {
+							this.list = this.list.concat(res)
+						}
+						
+						this.allData[type] = this.list
+					})
+				}
 			},
 			
 			// 点击广告位的某项
@@ -270,29 +319,12 @@
 			}
 		},
 		
+		onPullDownRefresh() {
+			this.refreshData()
+		},
+		
 		onReachBottom() {
-			var type = cgp_recommend_types[this.current]
-			var page = this.pages[type]
-			page ++
-			console.log(page)
-			this.pages[type] = page
-			
-			if (this.current == 0) {
-				// 获取全部推荐数据
-				cgp_recommend_all_list(this.Bmob,page).then((res) => {
-					this.list = this.list.concat(res)
-					this.allData.ALL = this.list
-				})
-				return
-			}
-			
-			if (this.current > 0) {
-				// 筛选数据
-				cgp_recommend_query_list(this.Bmob,this.current,page).then((res) => {
-					this.list = this.list.concat(res)
-					this.allData[type] = this.list
-				})
-			}
+			this.refreshData(true)
 		},
 		
 		onPageScroll(e) {

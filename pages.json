@@ -6,7 +6,8 @@
 		{
 			"path": "pages/recommend/cgp_recommend",
 			"style": {
-				"navigationStyle":"custom"
+				"navigationStyle":"custom",
+				"enablePullDownRefresh":true
 			}
 		},
 		{
