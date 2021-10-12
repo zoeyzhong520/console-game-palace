@@ -77,6 +77,19 @@
 	text-align: center;
 }
 
+/* 新上架标识 */
+.list-cell-new-tag {
+	padding: 0 10rpx;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	
+	color: #fa3534;
+	font-size: 30rpx;
+	line-height: 42rpx;
+	text-align: center;
+}
+
 .slot-wrap {
 	display: flex;
 	align-items: center;

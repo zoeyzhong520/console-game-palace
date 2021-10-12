@@ -4,7 +4,10 @@ import App from './App'
 import Vue from 'vue'
 import {store} from './common/store.js'
 import uView from "uview-ui";
-import {formattingStr} from 'common/common.js'
+import {
+	formattingStr,
+	dateDifference,
+} from 'common/common.js'
 
 Vue.config.productionTip = false
 App.mpType = 'app'
@@ -26,6 +29,7 @@ Bmob.initialize("df3cba52942cb8b9", "kn03PK")
 // 挂载到全局使用
 Vue.prototype.Bmob = Bmob
 Vue.prototype.formattingStr = formattingStr
+Vue.prototype.dateDifference = dateDifference
 Vue.prototype.store = store // 挂载 Vuex
 
 // #endif

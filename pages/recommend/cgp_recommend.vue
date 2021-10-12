@@ -39,6 +39,8 @@
 					<text class="list-cell-description">{{ item.description }}</text>
 					<!-- 阅读全文 -->
 					<view class="list-cell-check-detail">阅读全文</view>
+					<!-- 新上架标识 -->
+					<text v-if="item.isNew" class="list-cell-new-tag">New</text>
 				</view>
 			</view>
 		</view>
@@ -177,12 +179,24 @@
 				this.bannerList = res
 			})
 			
+			// 获取今天是X年X月X日
+			this.todayTime = this.$u.timeFormat(new Date().getTime(), 'yyyy-mm-dd hh:MM:ss')
+			
 			// 获取全部推荐数据
 			cgp_recommend_all_list(this.Bmob,0).then((res) => {
 				uni.stopPullDownRefresh()
 				
 				this.list = res
-				this.allData.ALL = res
+				
+				this.list.map((item) => {
+					// 筛选出一天内更新的游戏
+					if (this.dateDifference(item.createdAt, this.todayTime) <= 3) {
+						// 设置新上架的标识
+						item.isNew = true
+					}
+				})
+				
+				this.allData.ALL = this.list
 			})
 			
 			// 获取导航栏高度
@@ -245,6 +259,15 @@
 					uni.stopPullDownRefresh()
 					
 					this.list = res
+					
+					this.list.map((item) => {
+						// 筛选出一天内更新的游戏
+						if (this.dateDifference(item.createdAt, this.todayTime) <= 1) {
+							// 设置新上架的标识
+							item.isNew = true
+						}
+					})
+					
 					this.allData[type] = this.list
 				})
 			},
@@ -268,6 +291,14 @@
 						} else {
 							this.list = this.list.concat(res)
 						}
+						
+						this.list.map((item) => {
+							// 筛选出一天内更新的游戏
+							if (this.dateDifference(item.createdAt, this.todayTime) <= 1) {
+								// 设置新上架的标识
+								item.isNew = true
+							}
+						})
 						
 						this.allData.ALL = this.list
 					})
