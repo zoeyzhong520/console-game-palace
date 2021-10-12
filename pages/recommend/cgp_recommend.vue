@@ -190,7 +190,7 @@
 				
 				this.list.map((item) => {
 					// 筛选出一天内更新的游戏
-					if (this.dateDifference(item.createdAt, this.todayTime) <= 3) {
+					if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
 						// 设置新上架的标识
 						item.isNew = true
 					}
@@ -262,7 +262,7 @@
 					
 					this.list.map((item) => {
 						// 筛选出一天内更新的游戏
-						if (this.dateDifference(item.createdAt, this.todayTime) <= 1) {
+						if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
 							// 设置新上架的标识
 							item.isNew = true
 						}
@@ -294,7 +294,7 @@
 						
 						this.list.map((item) => {
 							// 筛选出一天内更新的游戏
-							if (this.dateDifference(item.createdAt, this.todayTime) <= 1) {
+							if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
 								// 设置新上架的标识
 								item.isNew = true
 							}
