@@ -115,6 +115,8 @@ export const cgp_recommend_query_list = function(Bmob, index, page) {
 		
 		const query = Bmob.Query('CGP_HotRecommend')
 		query.equalTo("type", "==", cgp_recommend_types[index])
+		// 对createdAt字段降序排列
+		query.order("-createdAt")
 		query.limit(10)
 		query.skip(page*10)
 		query.find().then(res => {

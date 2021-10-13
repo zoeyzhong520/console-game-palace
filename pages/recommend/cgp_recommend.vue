@@ -189,7 +189,7 @@
 				this.list = res
 				
 				this.list.map((item) => {
-					// 筛选出一天内更新的游戏
+					// 筛选出3天内更新的游戏
 					if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
 						// 设置新上架的标识
 						item.isNew = true
@@ -261,7 +261,7 @@
 					this.list = res
 					
 					this.list.map((item) => {
-						// 筛选出一天内更新的游戏
+						// 筛选出3天内更新的游戏
 						if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
 							// 设置新上架的标识
 							item.isNew = true
@@ -293,7 +293,7 @@
 						}
 						
 						this.list.map((item) => {
-							// 筛选出一天内更新的游戏
+							// 筛选出3天内更新的游戏
 							if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
 								// 设置新上架的标识
 								item.isNew = true
@@ -315,6 +315,14 @@
 						} else {
 							this.list = this.list.concat(res)
 						}
+						
+						this.list.map((item) => {
+							// 筛选出3天内更新的游戏
+							if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
+								// 设置新上架的标识
+								item.isNew = true
+							}
+						})
 						
 						this.allData[type] = this.list
 					})
