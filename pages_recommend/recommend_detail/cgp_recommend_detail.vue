@@ -78,8 +78,6 @@
 				this.detailInfo = JSON.parse(decodeURIComponent(e.detailInfo))
 				// console.log(this.detailInfo)
 			}
-			
-			console.log(this.store.state)
 		},
 
 		computed: {

@@ -51,7 +51,7 @@
 		methods: {
 			getAllData() {
 				// 目前有1.3w余部游戏资源，设置自动分页请求20次，阀值暂为2w
-				for (var i=0; i<20; i ++) {
+				for (var i=0; i<111; i ++) {
 					recommend_search_all_data(this.Bmob, i).then((res) => {
 						if (i == 1) {
 							this.allData = res

@@ -21,8 +21,8 @@ export const recommend_search_all_data = function(Bmob, page) {
 	return new Promise((resolve, reject) => {
 		
 		const query = Bmob.Query('CGP_HotRecommend')
-		query.limit(1000)
-		query.skip(page * 1000)
+		query.limit(100)
+		query.skip(page * 100)
 		query.find().then(res => {
 			resolve(res)
 		});
