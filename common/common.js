@@ -43,3 +43,38 @@ export const dateDifference = function(startTime, endTime, diffType) {
 	}
 	return parseInt((eTime.getTime() - sTime.getTime()) / parseInt(timeType));
 };
+
+// 从本地缓存中异步获取指定 key 对应的内容 
+export const getStorage = function(key) {
+	return new Promise((resolve, reject) => {
+		
+		uni.getStorage({
+			key: key,
+			success(res) {
+				resolve(res.data)
+			},
+			fail() {
+				resolve(null)
+			}
+		})
+
+	})
+}
+
+// 将数据存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个异步接口 
+export const setStorage = function(key, data) {
+	return new Promise((resolve, reject) => {
+		
+		uni.setStorage({
+			key: key,
+			data: data,
+			success() {
+				resolve(true)
+			},
+			fail() {
+				resolve(false)
+			}
+		})
+
+	})
+}

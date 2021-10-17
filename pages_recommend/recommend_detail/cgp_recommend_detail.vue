@@ -7,7 +7,7 @@
 		<view class="recommend-detail-box">
 			<text class="recommend-detail-title">{{ detailInfo.title }}</text>
 		</view>
-
+		
 		<!-- 游戏简介 -->
 		<view class="recommend-detail-box">
 			<u-section title="游戏简介" color="#2979ff" :right="false"></u-section>
@@ -98,6 +98,11 @@
 					urls: urls,
 					current: index
 				})
+			},
+			
+			// 视频播放出错时触发
+			videoError(e) {
+				console.log(e)
 			},
 		}
 	}

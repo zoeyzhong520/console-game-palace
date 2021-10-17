@@ -7,6 +7,8 @@ import uView from "uview-ui";
 import {
 	formattingStr,
 	dateDifference,
+	getStorage,
+	setStorage
 } from 'common/common.js'
 
 Vue.config.productionTip = false
@@ -31,6 +33,8 @@ Vue.prototype.Bmob = Bmob
 Vue.prototype.formattingStr = formattingStr
 Vue.prototype.dateDifference = dateDifference
 Vue.prototype.store = store // 挂载 Vuex
+Vue.prototype.getStorage = getStorage
+Vue.prototype.setStorage = setStorage
 
 // #endif
 

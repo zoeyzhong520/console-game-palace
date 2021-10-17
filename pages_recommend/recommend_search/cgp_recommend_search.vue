@@ -25,10 +25,13 @@
 		recommend_search_all_data
 	} from './cgp_recommend_search.js'
 	
+	const all_data_cached_key = 'cgp_recommend_search_all_data'
+	
 	export default {
 		watch: {
 			keyword(val) {
 				// console.log(val)
+				this.startSearch()
 			}
 		},
 		
@@ -50,7 +53,25 @@
 		
 		methods: {
 			getAllData() {
-				// 目前有1.3w余部游戏资源，设置自动分页请求20次，阀值暂为2w
+				// 调用API前，先判断本地是否有已经缓存的全部数据
+				this.getStorage(all_data_cached_key).then((res) => {
+					if (!!res) {
+						// 已经缓存过了，直接返回
+						this.allData = res
+						return
+					}
+					
+					// 没有缓存过
+					this.callingAPI()
+				})
+			},
+			
+			callingAPI() {
+				// 目前有1.3w余部游戏资源，设置自动分页请求
+				uni.showLoading({
+					mask:false
+				})
+				
 				for (var i=0; i<111; i ++) {
 					recommend_search_all_data(this.Bmob, i).then((res) => {
 						if (i == 1) {
@@ -58,11 +79,22 @@
 						} else {
 							this.allData = this.allData.concat(res)
 						}
+						
+						// 缓存下数据
+						this.setStorage(all_data_cached_key, this.allData).then((res) => {})
+						
+						if (i == 111) {
+							uni.hideLoading()
+						}
 					})
 				}
 			},
 			
 			startSearch() {
+				if (this.keyword.length == 0) {
+					this.list = []
+					return
+				}
 				this.list = fuzzyQuery(this.allData, this.keyword)
 			},
 			
