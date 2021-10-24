@@ -33,3 +33,14 @@
 	/* 开启换行 */
 	word-wrap: break-word;
 }
+
+/* 分享规则 */
+.recommend-detail-share-rule {
+	font-size: 26rpx;
+	line-height: 40rpx;
+	color: #999999;
+	width: 690rpx;
+
+	/* 开启换行 */
+	word-wrap: break-word;
+}

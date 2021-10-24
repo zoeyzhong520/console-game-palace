@@ -52,6 +52,8 @@
 <script>
 	import {
 		cgp_recommend_tabsList,
+		cgp_recommend_insert_deviceId,
+		recommend_detail_editRecord_with_objectId,
 		cgp_configs,
 		cgp_recommend_banner_list,
 		cgp_recommend_all_list,
@@ -76,6 +78,8 @@
 				list: [],
 				// 控制弹出层打开、收起的变量
 				show: false,
+				// 分享携带的 objectId
+				shareObjectId: '',
 				// 缓存的数据
 				allData: {
 					ALL: [],
@@ -165,9 +169,19 @@
 			}
 		},
 
-		onLoad() {
+		onLoad(e) {
+			if (e.shareObjectId) {
+				// 分享打开
+				this.shareObjectId = e.shareObjectId
+				// 是否分享打开
+				this.isShare = true
+			}
+			
 			// tabs标签数组
 			this.tabsList = cgp_recommend_tabsList
+			
+			// 新增一行记录 设备ID
+			this.insertDeviceId()
 			
 			// 获取配置信息
 			this.getConfigs()
@@ -205,13 +219,33 @@
 		},
 
 		methods: {
-			...mapMutations(['setIsInReview']),
+			...mapMutations(['setIsInReview', 'setGamesCount', 'setDeviceIdsObjectId']),
+			
+			// 新增一行记录 设备ID
+			insertDeviceId() {
+				cgp_recommend_insert_deviceId(this.Bmob).then(res => {
+					this.setDeviceIdsObjectId(res.objectId)
+					// 如果是分享打开此页面，则比对下两个 objectId 是否相同
+					// objectId 不相同并且是新注册的设备，表明打开分享页的是新用户，把分享者权限打开	
+					if (this.isShare) {
+						if (res.objectId != this.shareObjectId && res.isNewDevice) {
+							// 修改一行数据
+							recommend_detail_editRecord_with_objectId(this.Bmob, this.shareObjectId).then(res => {
+								// 好友点开自己分享的卡片，权限开通成功！
+							})
+						} else {
+							// 点开自己分享的卡片，权限开通失败！
+						}
+					}
+				})
+			},
 			
 			// 获取配置信息
 			getConfigs() {
 				cgp_configs(this.Bmob).then((res) => {
 					// console.log(res)
 					this.setIsInReview(res[0].isInReview)
+					this.setGamesCount(res[0].gamesCount)
 				})
 			},
 			

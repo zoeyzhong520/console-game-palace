@@ -29,3 +29,4 @@ export const recommend_search_all_data = function(Bmob, page) {
 		
 	})
 }
+

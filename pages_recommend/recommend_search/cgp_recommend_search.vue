@@ -46,9 +46,10 @@
 			}
 		},
 		
-		onLoad() {
+		onLoad(e) {
 			// 获取全部数据
-			this.getAllData()
+			// this.getAllData()
+			this.callingAPI()
 		},
 		
 		methods: {
@@ -72,7 +73,10 @@
 					mask:false
 				})
 				
-				for (var i=0; i<111; i ++) {
+				// 根据当前游戏总数目计算出需要分页多少
+				var maxCount = Math.ceil(this.store.state.gamesCount / 100)
+				// console.log(maxCount)
+				for (var i=0; i<maxCount; i ++) {
 					recommend_search_all_data(this.Bmob, i).then((res) => {
 						if (i == 1) {
 							this.allData = res
@@ -83,7 +87,7 @@
 						// 缓存下数据
 						this.setStorage(all_data_cached_key, this.allData).then((res) => {})
 						
-						if (i == 111) {
+						if (i == maxCount) {
 							uni.hideLoading()
 						}
 					})
