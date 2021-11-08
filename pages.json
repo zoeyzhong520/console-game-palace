@@ -16,6 +16,12 @@
 				"navigationBarTitleText": "热门文章",
 				"enablePullDownRefresh":true
 			}
+		},
+		{
+			"path": "pages/usercenter/cgp_usercenter",
+			"style": {
+				"navigationBarTitleText": "单机小助"
+			}
 		}
 	],
 	
@@ -47,6 +53,30 @@
 					}
 				}
 			]
+		},
+		{
+			"root":"pages_usercenter",
+			"pages": [
+				{
+					"path":"usercenter_join/usercenter_join",
+					"style": {
+						"navigationBarTitleText":"如何加入俱乐部"
+					}
+				},
+				{
+					"path":"usercenter_about/usercenter_about",
+					"style": {
+						"navigationBarTitleText":"关于"
+					}
+				},
+				{
+					"path":"usercenter_leaderboards/leaderboards_list/leaderboards_list",
+					"style": {
+						"navigationBarTitleText":"",
+						"enablePullDownRefresh":true
+					}
+				}
+			]
 		}
 	],
 	
@@ -60,6 +90,19 @@
 			"packages": ["__APP__"]
 		},
 		"pages_recommend/recommend_search/cgp_recommend_search": {
+			"network": "all",
+			"packages": ["__APP__"]
+		},
+		
+		"pages_usercenter/usercenter_join/usercenter_join": {
+			"network": "all",
+			"packages": ["__APP__"]
+		},
+		"pages_usercenter/usercenter_about/usercenter_about": {
+			"network": "all",
+			"packages": ["__APP__"]
+		},
+		"pages_usercenter/usercenter_leaderboards/leaderboards_list/leaderboards_list": {
 			"network": "all",
 			"packages": ["__APP__"]
 		}
@@ -86,6 +129,12 @@
 				"iconPath": "static/tabBar/articles.jpeg",
 				"selectedIconPath": "static/tabBar/articles-filling.jpeg",
 				"text": "热门文章"
+			},
+			{
+				"pagePath": "pages/usercenter/cgp_usercenter",
+				"iconPath": "static/tabBar/usercenter.png",
+				"selectedIconPath": "static/tabBar/usercenter-filling.png",
+				"text": "戳我"
 			}
 		]
 	}

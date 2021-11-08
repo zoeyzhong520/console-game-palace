@@ -8,7 +8,8 @@ import {
 	formattingStr,
 	dateDifference,
 	getStorage,
-	setStorage
+	setStorage,
+	color16Random
 } from 'common/common.js'
 
 Vue.config.productionTip = false
@@ -35,6 +36,7 @@ Vue.prototype.dateDifference = dateDifference
 Vue.prototype.store = store // 挂载 Vuex
 Vue.prototype.getStorage = getStorage
 Vue.prototype.setStorage = setStorage
+Vue.prototype.color16Random = color16Random
 
 // #endif
 

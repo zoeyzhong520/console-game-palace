@@ -63,7 +63,8 @@
 
 <script>
 	import {
-		recommend_detail_getRecord_with_objectId
+		recommend_detail_getRecord_with_objectId,
+		recommend_detail_editRecord_with_objectId
 	} from './cgp_recommend_detail.js'
 	
 	export default {
@@ -90,11 +91,17 @@
 		onLoad(e) {
 			if (e.detailInfo) {
 				this.detailInfo = JSON.parse(decodeURIComponent(e.detailInfo))
+				// console.log(JSON.stringify(this.detailInfo))
 			}
 			
 			// 根据设备ID合集主键 objectId 获取一行记录
 			recommend_detail_getRecord_with_objectId(this.Bmob, this.store.state.deviceIdsObjectId).then(res => {
 				this.hasPermission = res.hasPermission
+			})
+			
+			// 根据主键修改一行记录
+			recommend_detail_editRecord_with_objectId(this.Bmob, this.detailInfo.objectId).then(res => {
+				
 			})
 		},
 

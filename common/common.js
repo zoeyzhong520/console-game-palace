@@ -47,7 +47,7 @@ export const dateDifference = function(startTime, endTime, diffType) {
 // 从本地缓存中异步获取指定 key 对应的内容 
 export const getStorage = function(key) {
 	return new Promise((resolve, reject) => {
-		
+
 		uni.getStorage({
 			key: key,
 			success(res) {
@@ -64,7 +64,7 @@ export const getStorage = function(key) {
 // 将数据存储在本地缓存中指定的 key 中，会覆盖掉原来该 key 对应的内容，这是一个异步接口 
 export const setStorage = function(key, data) {
 	return new Promise((resolve, reject) => {
-		
+
 		uni.setStorage({
 			key: key,
 			data: data,
@@ -77,4 +77,20 @@ export const setStorage = function(key, data) {
 		})
 
 	})
+}
+
+export const rgbRandom = function() { //rgb颜色随机
+	var r = Math.floor(Math.random() * 256);
+	var g = Math.floor(Math.random() * 256);
+	var b = Math.floor(Math.random() * 256);
+	var rgb = '(' + r + ',' + g + ',' + b + ')';
+	return rgb;
+}
+
+export const color16Random = function() { //十六进制颜色随机
+	var r = Math.floor(Math.random() * 256);
+	var g = Math.floor(Math.random() * 256);
+	var b = Math.floor(Math.random() * 256);
+	var color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
+	return color;
 }

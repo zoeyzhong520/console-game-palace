@@ -12,7 +12,7 @@ export const store = new Vuex.Store({
 		// 游戏总数目
 		gamesCount: 0,
 		// 设备ID 合集主键 deviceIdsObjectId
-		deviceIdsObjectId: '',
+		deviceIdsObjectId: ''
 	},
 	
 	mutations: {
@@ -32,7 +32,8 @@ export const store = new Vuex.Store({
 		setDeviceIdsObjectId(state, provider) {
 			// console.log("设置设备ID 合集主键 deviceIdsObjectId：",provider)
 			state.deviceIdsObjectId = provider
-		}
+		},
+		
 	}
 	
 })

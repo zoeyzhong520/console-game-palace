@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/recommend/cgp_recommend",
-    "pages/articles/cgp_articles"
+    "pages/articles/cgp_articles",
+    "pages/usercenter/cgp_usercenter"
   ],
   "subPackages": [
     {
@@ -15,6 +16,14 @@
       "pages": [
         "recommend_detail/cgp_recommend_detail",
         "recommend_search/cgp_recommend_search"
+      ]
+    },
+    {
+      "root": "pages_usercenter",
+      "pages": [
+        "usercenter_join/usercenter_join",
+        "usercenter_about/usercenter_about",
+        "usercenter_leaderboards/leaderboards_list/leaderboards_list"
       ]
     }
   ],
@@ -39,6 +48,12 @@
         "iconPath": "static/tabBar/articles.jpeg",
         "selectedIconPath": "static/tabBar/articles-filling.jpeg",
         "text": "热门文章"
+      },
+      {
+        "pagePath": "pages/usercenter/cgp_usercenter",
+        "iconPath": "static/tabBar/usercenter.png",
+        "selectedIconPath": "static/tabBar/usercenter-filling.png",
+        "text": "戳我"
       }
     ]
   },
@@ -56,6 +71,24 @@
       ]
     },
     "pages_recommend/recommend_search/cgp_recommend_search": {
+      "network": "all",
+      "packages": [
+        "__APP__"
+      ]
+    },
+    "pages_usercenter/usercenter_join/usercenter_join": {
+      "network": "all",
+      "packages": [
+        "__APP__"
+      ]
+    },
+    "pages_usercenter/usercenter_about/usercenter_about": {
+      "network": "all",
+      "packages": [
+        "__APP__"
+      ]
+    },
+    "pages_usercenter/usercenter_leaderboards/leaderboards_list/leaderboards_list": {
       "network": "all",
       "packages": [
         "__APP__"
