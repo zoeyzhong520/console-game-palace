@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+.leaderboards-list-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding-bottom: 30rpx;
+}
+
+/* 排行榜名次标识 */
+.list-cell-new-tag {
+	padding: 0 10rpx;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	
+	color: #fa3534;
+	font-size: 30rpx;
+	line-height: 42rpx;
+	font-weight: bold;
+	text-align: center;
+}

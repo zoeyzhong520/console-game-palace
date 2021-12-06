@@ -1,0 +1,128 @@
+@charset "utf-8";
+.leaderboards-list-container {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding-bottom: 30rpx;
+}
+
+/* 排行榜名次标识 */
+.list-cell-new-tag {
+	padding: 0 10rpx;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	
+	color: #fa3534;
+	font-size: 30rpx;
+	line-height: 42rpx;
+	font-weight: bold;
+	text-align: center;
+}
+@charset "utf-8";
+.container {
+	height: 200vh;
+	position: relative;
+}
+.list-cell {
+	display: flex;
+	position: relative;
+	box-sizing: border-box;
+	margin-left: 30rpx;
+	margin-right: 30rpx;
+	padding: 30rpx 0;
+	border-bottom: 1rpx solid #EBEBEB;
+}
+.list-cell-image {
+	width: 160rpx;
+	height: 220rpx;
+	border-radius: 8rpx;
+	background-color: #F5F6F7;
+}
+.list-cell-title {
+	margin-left: 30rpx;
+	color: #333333;
+	font-weight: bold;
+	font-size: 30rpx;
+	line-height: 42rpx;
+	width: 480rpx;
+	
+	/* 限制两行 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	/* 多行在这里修改数字即可 */
+	-webkit-line-clamp: 2; 
+	overflow:hidden;
+	/* autoprefixer: ignore next */
+	-webkit-box-orient: vertical;
+}
+.list-cell-description {
+	margin-left: 30rpx;
+	color: #999999;
+	font-size: 24rpx;
+	line-height: 33rpx;
+	width: 480rpx;
+	margin-top: 10rpx;
+	
+	/* 限制两行 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	/* 多行在这里修改数字即可 */
+	-webkit-line-clamp: 2; 
+	overflow:hidden;
+	/* autoprefixer: ignore next */
+	-webkit-box-orient: vertical;
+}
+.list-cell-check-detail {
+	margin-left: 30rpx;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #2979ff;
+	border-radius: 4rpx;
+	padding: 0 10rpx;
+	position: absolute;
+	bottom: 0;
+	
+	color: #FFFFFF;
+	font-size: 30rpx;
+	line-height: 42rpx;
+	text-align: center;
+}
+
+/* 新上架标识 */
+.list-cell-new-tag {
+	padding: 0 10rpx;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	
+	color: #fa3534;
+	font-size: 30rpx;
+	line-height: 42rpx;
+	font-weight: bold;
+	text-align: center;
+}
+.slot-wrap {
+	display: flex;
+	align-items: center;
+	/* 如果您想让slot内容占满整个导航栏的宽度 */
+	/* flex: 1; */
+	/* 如果您想让slot内容与导航栏左右有空隙 */
+	padding: 20rpx 30rpx;
+}
+.sticky {
+	width: 750rpx;
+	height: 80rpx;
+	color: #fff;
+	position: fixed;
+	z-index: 1;
+}
+.grid-text {
+	font-size: 28rpx;
+	margin-top: 4rpx;
+	color: $u-type-info;
+}
+
