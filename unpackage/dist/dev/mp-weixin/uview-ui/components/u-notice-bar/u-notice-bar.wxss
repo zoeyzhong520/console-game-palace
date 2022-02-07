@@ -32,35 +32,27 @@
   overflow: hidden;
 }
 .u-direction-row.data-v-087a7280 {
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   justify-content: space-between;
 }
 .u-left-icon.data-v-087a7280 {
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
 }
 .u-notice-box.data-v-087a7280 {
   flex: 1;
-
   display: flex;
   flex-direction: row;
-
   overflow: hidden;
   margin-left: 12rpx;
 }
 .u-right-icon.data-v-087a7280 {
   margin-left: 12rpx;
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
 }
 .u-notice-content.data-v-087a7280 {

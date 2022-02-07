@@ -27,10 +27,8 @@
 .u-grid-item.data-v-54899586 {
   box-sizing: border-box;
   background: #fff;
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   justify-content: center;
   position: relative;
@@ -51,10 +49,8 @@
 }
 .u-grid-item-box.data-v-54899586 {
   padding: 30rpx 0;
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   justify-content: center;
   flex-direction: column;

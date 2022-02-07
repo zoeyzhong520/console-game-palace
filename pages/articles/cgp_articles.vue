@@ -14,6 +14,9 @@
 </template>
 
 <script>
+	// 在页面中定义插屏广告
+	let interstitialAd = null
+	
 	import {
 		cgp_popular_articles_list
 	} from '../../pages_articles/common/cgp_articles.js'
@@ -25,11 +28,34 @@
 				list: [],
 				// 分页加载的页码
 				page: 0,
+				onShowCount: 0,
+			}
+		},
+		
+		onShow() {
+			this.onShowCount++
+			// 在适合的场景显示插屏广告
+			if (interstitialAd && this.onShowCount >= 2) {
+			  interstitialAd.show().catch((err) => {
+			    console.error(err)
+			  })
+			  console.log('onShow')
 			}
 		},
 		
 		onLoad() {
+			console.log('onLoad')
 			uni.startPullDownRefresh()
+			
+			// 在页面onLoad回调事件中创建插屏广告实例
+			if (wx.createInterstitialAd) {
+			  interstitialAd = wx.createInterstitialAd({
+			    adUnitId: 'adunit-d23270abf06d64d0'
+			  })
+			  interstitialAd.onLoad(() => {})
+			  interstitialAd.onError((err) => {})
+			  interstitialAd.onClose(() => {})
+			}
 		},
 		
 		methods: {

@@ -26,10 +26,8 @@
 /* 文章场景相关 */
 .u-notice-bar.data-v-475fdbf0 {
   width: 100%;
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   justify-content: center;
   flex-wrap: nowrap;
@@ -39,19 +37,15 @@
 .u-swiper.data-v-475fdbf0 {
   font-size: 26rpx;
   height: 32rpx;
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   flex: 1;
   margin-left: 12rpx;
 }
 .u-swiper-item.data-v-475fdbf0 {
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   overflow: hidden;
 }

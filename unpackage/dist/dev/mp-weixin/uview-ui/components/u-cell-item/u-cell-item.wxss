@@ -25,10 +25,8 @@
 /* 透明度 */
 /* 文章场景相关 */
 .u-cell.data-v-65423b64 {
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   position: relative;
   box-sizing: border-box;
@@ -54,10 +52,8 @@
 }
 .u-cell__left-icon-wrap.data-v-65423b64,
 .u-cell__right-icon-wrap.data-v-65423b64 {
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   height: 48rpx;
 }
@@ -96,10 +92,8 @@
 }
 .u-cell--required.data-v-65423b64 {
   overflow: visible;
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
 }
 .u-cell--required.data-v-65423b64:before {

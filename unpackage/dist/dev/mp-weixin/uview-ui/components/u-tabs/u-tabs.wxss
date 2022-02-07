@@ -54,10 +54,8 @@ scroll-view.data-v-3b2b1a80 {
   bottom: 0;
 }
 .u-tabs-scorll-flex.data-v-3b2b1a80 {
-
   display: flex;
   flex-direction: row;
-
   justify-content: space-between;
 }
 

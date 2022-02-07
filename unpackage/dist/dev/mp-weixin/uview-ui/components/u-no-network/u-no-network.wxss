@@ -34,10 +34,8 @@
 }
 .u-inner.data-v-b9702e00 {
   height: 100vh;
-
   display: flex;
   flex-direction: row;
-
   flex-direction: column;
   align-items: center;
   justify-content: center;

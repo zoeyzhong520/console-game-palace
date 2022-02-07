@@ -68,10 +68,8 @@
   background-color: #ffffff;
 }
 .u-drawer-center.data-v-17becaea {
-
   display: flex;
   flex-direction: row;
-
   flex-direction: column;
   bottom: 0;
   left: 0;

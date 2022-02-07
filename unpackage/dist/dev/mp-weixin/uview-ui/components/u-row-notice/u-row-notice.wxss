@@ -29,10 +29,8 @@
   overflow: hidden;
 }
 .u-direction-row.data-v-d36ba0c0 {
-
   display: flex;
   flex-direction: row;
-
   align-items: center;
   justify-content: space-between;
 }
@@ -42,10 +40,8 @@
 }
 .u-notice-box.data-v-d36ba0c0 {
   flex: 1;
-
   display: flex;
   flex-direction: row;
-
   overflow: hidden;
   margin-left: 12rpx;
 }
@@ -59,10 +55,8 @@
           animation: u-loop-animation-data-v-d36ba0c0 10s linear infinite both;
   text-align: right;
   padding-left: 100%;
-
   display: flex;
   flex-direction: row;
-
   flex-wrap: nowrap;
 }
 .u-notice-text.data-v-d36ba0c0 {
