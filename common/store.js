@@ -12,7 +12,11 @@ export const store = new Vuex.Store({
 		// 游戏总数目
 		gamesCount: 0,
 		// 设备ID 合集主键 deviceIdsObjectId
-		deviceIdsObjectId: ''
+		deviceIdsObjectId: '',
+		// 记录搜索行为的标识
+		searchFlag: false,
+		// 记录是否已观看过加入我们激励视频广告
+		joinRewardedVideoAdFlag: false,
 	},
 	
 	mutations: {
@@ -34,6 +38,17 @@ export const store = new Vuex.Store({
 			state.deviceIdsObjectId = provider
 		},
 		
+		// 记录搜索行为的标识
+		setSearchFlag(state, provider) {
+			// console.log('记录搜索行为的标识:',provider)
+			state.searchFlag = provider
+		},
+		
+		// 记录是否已观看过加入我们激励视频广告
+		setJoinRewardedVideoAdFlag(state, provider) {
+			// console.log('记录是否已观看过加入我们激励视频广告:',provider)
+			state.joinRewardedVideoAdFlag = provider
+		}
 	}
 	
 })

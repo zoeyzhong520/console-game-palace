@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "关于",
-  "usingComponents": {}
+  "usingComponents": {
+    "u-gap": "/uview-ui/components/u-gap/u-gap"
+  }
 }

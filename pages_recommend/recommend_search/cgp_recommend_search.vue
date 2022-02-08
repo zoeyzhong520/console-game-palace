@@ -3,6 +3,9 @@
 	<view class="">
 		<u-search class="slot-wrap" placeholder="请输入游戏名称" v-model="keyword" :focus="true" @custom="startSearch" @search="startSearch"></u-search>
 		
+		<!-- 视频广告 -->
+		<ad unit-id="adunit-34e2b370403d64f8" ad-type="video" ad-theme="white"></ad>
+		
 		<!-- 列表 -->
 		<view class="list-cell" v-for="(item, index) in list" :key="index" @click="listClick(item)">
 			<!-- 图片 -->
@@ -24,6 +27,10 @@
 		fuzzyQuery,
 		recommend_search_all_data
 	} from './cgp_recommend_search.js'
+	
+	import {
+		mapMutations
+	} from 'vuex' // 使用Vuex
 	
 	const all_data_cached_key = 'cgp_recommend_search_all_data'
 	
@@ -53,6 +60,8 @@
 		},
 		
 		methods: {
+			...mapMutations(['setSearchFlag']),
+			
 			getAllData() {
 				// 调用API前，先判断本地是否有已经缓存的全部数据
 				this.getStorage(all_data_cached_key).then((res) => {
@@ -100,6 +109,9 @@
 					return
 				}
 				this.list = fuzzyQuery(this.allData, this.keyword)
+				
+				// 更新搜索行为的标识
+				this.setSearchFlag(true)
 			},
 			
 			listClick(item) {

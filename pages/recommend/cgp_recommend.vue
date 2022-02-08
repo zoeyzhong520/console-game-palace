@@ -20,7 +20,7 @@
 				</u-grid-item>
 			</u-grid>
 		</u-popup>
-
+		
 		<view v-show="current == 0">
 			<u-gap height="80" bg-color="#fff"></u-gap>
 
@@ -66,7 +66,7 @@
 	import {
 		mapMutations
 	} from 'vuex' // 使用Vuex
-
+	
 	export default {
 		data() {
 			return {
@@ -218,11 +218,16 @@
 			// 获取导航栏高度
 			const sysInfo = uni.getSystemInfoSync()
 			this.statusNavBarH = (sysInfo.statusBarHeight + 44) * 2
+			
+			// 显示 tabBar 某一项的右上角的红点
+			uni.showTabBarRedDot({
+				index:2
+			})
 		},
 
 		methods: {
-			...mapMutations(['setIsInReview', 'setGamesCount', 'setDeviceIdsObjectId']),
-
+			...mapMutations(['setIsInReview', 'setGamesCount', 'setDeviceIdsObjectId', 'setSearchFlag']),
+			
 			// 新增一行记录 设备ID
 			insertDeviceId() {
 				cgp_recommend_insert_deviceId(this.Bmob).then(res => {
@@ -392,7 +397,7 @@
 
 		onShareAppMessage() {
 			return {
-				title: '单机小助-游戏推荐'
+				title: '单机小助-为您准备的游戏推荐'
 			}
 		},
 

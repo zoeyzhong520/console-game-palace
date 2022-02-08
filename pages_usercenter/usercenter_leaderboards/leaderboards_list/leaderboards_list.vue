@@ -1,6 +1,9 @@
 <template>
 	<!-- 排行榜列表 -->
 	<view class="leaderboards-list-container">
+		<!-- 视频广告 -->
+		<ad unit-id="adunit-9738cef38f29d674" ad-type="video" ad-theme="white"></ad>
+		
 		<!-- 列表 -->
 		<view class="list-cell" v-for="(item, index) in list" :key="index" @click="listClick(item)">
 			<!-- 图片 -->
@@ -35,8 +38,6 @@
 				type: '',
 				// 列表数据
 				list: [],
-				// 分页加载的页码
-				page: 0,
 			}
 		},
 		
@@ -51,18 +52,14 @@
 				})
 			}
 			
-			uni.startPullDownRefresh()
+			this.refreshData()
 		},
 		
 		methods: {
 			// 刷新数据
 			refreshData(isLoadMore) {
-				// isLoadMore ? this.page ++ : this.page = 0
-				
 				// 获取热门文章列表
 				leaderboards_query_list(this.Bmob, this.type, this.page).then((res) => {
-					uni.stopPullDownRefresh()
-					
 					if (this.page == 0) {
 						this.list = res
 					} else {
@@ -77,14 +74,6 @@
 					url:'/pages_recommend/recommend_detail/cgp_recommend_detail?detailInfo=' + encodeURIComponent(JSON.stringify(item))
 				})
 			},
-		},
-		
-		onPullDownRefresh() {
-			this.refreshData()
-		},
-		
-		onReachBottom() {
-			// this.refreshData(true)
 		},
 	}
 </script>

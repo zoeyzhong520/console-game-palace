@@ -32,7 +32,10 @@
 				<text class="recommend-detail-description">{{ detailInfo.requirements }}</text>
 			</view>
 		</view>
-
+		
+		<!-- 视频广告 -->
+		<ad unit-id="adunit-3e6f2246eecabc7d" ad-type="video" ad-theme="white"></ad>
+		
 		<!-- 资源地址 -->
 		<view class="recommend-detail-box" v-if="!cgp_isInReview && detailInfo.resources">
 			<u-section title="资源地址" color="#2979ff" :right="false"></u-section>

@@ -72,8 +72,7 @@
 				{
 					"path":"usercenter_leaderboards/leaderboards_list/leaderboards_list",
 					"style": {
-						"navigationBarTitleText":"",
-						"enablePullDownRefresh":true
+						"navigationBarTitleText":""
 					}
 				}
 			]
