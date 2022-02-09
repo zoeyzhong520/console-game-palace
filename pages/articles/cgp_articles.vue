@@ -83,7 +83,8 @@
 
 		onShareAppMessage() {
 			return {
-				title: '单机小助-热门文章也好看哦'
+				title: '单机小助-热门文章也好看哦',
+				imageUrl: this.list[0].image
 			}
 		},
 
