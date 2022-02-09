@@ -9,6 +9,7 @@
 }
 
 .articles-card {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -36,4 +37,20 @@
 	
 	/* 开启换行 */
 	word-wrap: break-word;
+}
+
+/* 新上架标识 */
+.list-cell-new-tag {
+	padding: 0 10rpx;
+	position: absolute;
+	right: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.3);
+	border-radius: 0 8rpx 0 8rpx;
+	
+	color: #fa3534;
+	font-size: 30rpx;
+	line-height: 42rpx;
+	font-weight: bold;
+	text-align: center;
 }

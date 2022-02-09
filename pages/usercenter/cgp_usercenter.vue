@@ -64,6 +64,10 @@
 				title: '单机小助-快戳我进宝库'
 			}
 		},
+		
+		onTabItemTap() {
+			uni.vibrateShort()
+		},
 	}
 </script>
 

@@ -226,7 +226,7 @@
 		},
 
 		methods: {
-			...mapMutations(['setIsInReview', 'setGamesCount', 'setDeviceIdsObjectId', 'setSearchFlag']),
+			...mapMutations(['setIsInReview', 'setGamesCount', 'setDeviceIdsObjectId', 'setSearchFlag', 'setArticlesCount']),
 			
 			// 新增一行记录 设备ID
 			insertDeviceId() {
@@ -253,6 +253,20 @@
 					// console.log(res)
 					this.setIsInReview(res[0].isInReview)
 					this.setGamesCount(res[0].gamesCount)
+					this.setArticlesCount(res[0].articlesCount)
+					
+					// 缓存文章总数
+					if (!!!uni.getStorageSync('articlesCount')) {
+						uni.setStorageSync('articlesCount', res[0].articlesCount)
+					}
+					
+					// 为 tabBar 某一项的右上角添加文本
+					if (!!uni.getStorageSync('articlesCount') && res[0].articlesCount > uni.getStorageSync('articlesCount'))  {
+						uni.setTabBarBadge({
+							index:1,
+							text:''+(res[0].articlesCount-uni.getStorageSync('articlesCount'))
+						})
+					}
 				})
 			},
 
@@ -397,7 +411,7 @@
 
 		onShareAppMessage() {
 			return {
-				title: '单机小助-为您准备的游戏推荐'
+				title: '单机小助-为您精挑细选的游戏推荐'
 			}
 		},
 
@@ -412,6 +426,10 @@
 		onPageScroll(e) {
 			var type = cgp_recommend_types[this.current]
 			this.pageScrollArr[type] = e.scrollTop
+		},
+		
+		onTabItemTap() {
+			uni.vibrateShort()
 		},
 	}
 </script>

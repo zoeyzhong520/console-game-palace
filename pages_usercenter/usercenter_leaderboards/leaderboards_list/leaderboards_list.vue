@@ -47,6 +47,7 @@
 			}
 			
 			if (e.navTitle) {
+				this.navTitle = e.navTitle
 				uni.setNavigationBarTitle({
 					title:e.navTitle
 				})
@@ -74,6 +75,14 @@
 					url:'/pages_recommend/recommend_detail/cgp_recommend_detail?detailInfo=' + encodeURIComponent(JSON.stringify(item))
 				})
 			},
+		},
+		
+		onShareAppMessage() {
+			return {
+				title: this.navTitle,
+				imageUrl: this.list[0].image,
+				path: '/pages_usercenter/usercenter_leaderboards/leaderboards_list/leaderboards_list?navTitle='+this.navTitle+'&type='+this.type
+			}
 		},
 	}
 </script>

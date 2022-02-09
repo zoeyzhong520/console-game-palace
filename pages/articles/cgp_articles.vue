@@ -11,6 +11,9 @@
 
 			<!-- 标题 -->
 			<text class="articles-title">{{ item.title }}</text>
+			
+			<!-- 新上架标识 -->
+			<text v-if="item.isNew" class="list-cell-new-tag">New</text>
 		</view>
 		<!-- NoNetwork 无网络提示 -->
 		<u-no-network></u-no-network>
@@ -34,6 +37,15 @@
 
 		onLoad() {
 			uni.startPullDownRefresh()
+			
+			// 获取今天是X年X月X日
+			this.todayTime = this.$u.timeFormat(new Date().getTime(), 'yyyy-mm-dd hh:MM:ss')
+		},
+		
+		onShow() {
+			uni.removeTabBarBadge({
+				index:1
+			})
 		},
 
 		methods: {
@@ -47,7 +59,7 @@
 			// 刷新数据
 			refreshData(isLoadMore) {
 				isLoadMore ? this.page++ : this.page = 0
-
+				
 				// 获取热门文章列表
 				cgp_popular_articles_list(this.Bmob, this.page).then((res) => {
 					uni.stopPullDownRefresh()
@@ -57,6 +69,14 @@
 					} else {
 						this.list = this.list.concat(res)
 					}
+					
+					this.list.map((item) => {
+						// 筛选出3天内更新的游戏
+						if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
+							// 设置新上架的标识
+							item.isNew = true
+						}
+					})
 				})
 			},
 		},
@@ -73,6 +93,12 @@
 
 		onReachBottom() {
 			this.refreshData(true)
+		},
+		
+		onTabItemTap() {
+			uni.vibrateShort()
+			// 更新缓存文章总数
+			uni.setStorageSync('articlesCount', this.store.state.articlesCount)
 		},
 	}
 </script>

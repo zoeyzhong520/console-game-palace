@@ -130,10 +130,13 @@
 		},
 		
 		onShareAppMessage() {
+			let title = this.hasPermission ? this.detailInfo.title : '「单机小助」快来和我一起玩吧！'
+			// shareObjectId 分享者的 objectId
+			let path = this.hasPermission ? ('/pages_recommend/recommend_detail/cgp_recommend_detail?detailInfo=' +
+						encodeURIComponent(JSON.stringify(this.detailInfo))) : ('/pages/recommend/cgp_recommend?shareObjectId=' + this.store.state.deviceIdsObjectId)
 			return {
-				title:'「单机小助」快来和我一起玩吧！',
-				// shareObjectId 分享者的 objectId
-				path: '/pages/recommend/cgp_recommend?shareObjectId=' + this.store.state.deviceIdsObjectId,
+				title: title,
+				path: path,
 				imageUrl: this.detailInfo.imageList[0]
 			}
 		}

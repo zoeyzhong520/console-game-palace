@@ -17,6 +17,8 @@ export const store = new Vuex.Store({
 		searchFlag: false,
 		// 记录是否已观看过加入我们激励视频广告
 		joinRewardedVideoAdFlag: false,
+		// 文章总数
+		articlesCount: 0,
 	},
 	
 	mutations: {
@@ -48,7 +50,13 @@ export const store = new Vuex.Store({
 		setJoinRewardedVideoAdFlag(state, provider) {
 			// console.log('记录是否已观看过加入我们激励视频广告:',provider)
 			state.joinRewardedVideoAdFlag = provider
-		}
+		},
+		
+		// 文章总数
+		setArticlesCount(state, provider) {
+			// console.log('文章总数:',provider)
+			state.articlesCount = provider
+		},
 	}
 	
 })
