@@ -16,7 +16,7 @@
 				<!-- 简介 -->
 				<text class="list-cell-description">{{ item.description }}</text>
 				<!-- 阅读全文 -->
-				<view class="list-cell-check-detail">阅读全文</view>
+				<!-- <view class="list-cell-check-detail">阅读全文</view> -->
 			</view>
 		</view>
 	</view>

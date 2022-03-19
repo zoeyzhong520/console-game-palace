@@ -7,18 +7,19 @@
 		<!-- 列表 -->
 		<view class="list-cell" v-for="(item, index) in list" :key="index" @click="listClick(item)">
 			<!-- 图片 -->
-			<image class="list-cell-image" :src="item.image" mode="aspectFill"></image>
+			<image class="list-cell-image" :src="item.image" mode="aspectFill">
+				<!-- 排行榜标识 -->
+				<text class="list-cell-new-tag">
+					{{ 'Top'+(index+1) }}
+				</text>
+			</image>
 			<view style="display: flex;flex-direction: column;position: relative;">
 				<!-- 标题 -->
 				<text class="list-cell-title">{{ item.title }}</text>
 				<!-- 简介 -->
 				<text class="list-cell-description">{{ item.description }}</text>
 				<!-- 阅读全文 -->
-				<view class="list-cell-check-detail">阅读全文</view>
-				<!-- 排行榜标识 -->
-				<view class="list-cell-new-tag">
-					{{ 'Top'+(index+1) }}
-				</view>
+				<!-- <view class="list-cell-check-detail">阅读全文</view> -->
 			</view>
 		</view>
 	</view>

@@ -40,10 +40,10 @@
 					<!-- 简介 -->
 					<text class="list-cell-description">{{ item.description }}</text>
 					<!-- 阅读全文 -->
-					<view class="list-cell-check-detail">阅读全文</view>
-					<!-- 新上架标识 -->
-					<text v-if="item.isNew" class="list-cell-new-tag">New</text>
+					<!-- <view class="list-cell-check-detail">阅读全文</view> -->
 				</view>
+				<!-- 新上架标识 -->
+				<text v-if="item.isNew" class="list-cell-new-tag">New</text>
 			</view>
 		</view>
 		<!-- NoNetwork 无网络提示 -->

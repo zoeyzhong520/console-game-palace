@@ -5,20 +5,6 @@
 	position: relative;
 	padding-bottom: 30rpx;
 }
-
-/* 排行榜名次标识 */
-.list-cell-new-tag {
-	padding: 0 10rpx;
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	
-	color: #fa3534;
-	font-size: 30rpx;
-	line-height: 42rpx;
-	font-weight: bold;
-	text-align: center;
-}
 @charset "utf-8";
 .container {
 	height: 200vh;
@@ -26,6 +12,7 @@
 }
 .list-cell {
 	display: flex;
+	align-items: center;
 	position: relative;
 	box-sizing: border-box;
 	margin-left: 30rpx;
@@ -34,10 +21,10 @@
 	border-bottom: 1rpx solid #EBEBEB;
 }
 .list-cell-image {
-	width: 160rpx;
-	height: 220rpx;
+	width: 220rpx;
+	height: 140rpx;
 	border-radius: 8rpx;
-	background-color: #F5F6F7;
+	background-color: #ccc;
 }
 .list-cell-title {
 	margin-left: 30rpx;
@@ -45,7 +32,7 @@
 	font-weight: bold;
 	font-size: 30rpx;
 	line-height: 42rpx;
-	width: 480rpx;
+	width: 440rpx;
 	
 	/* 限制两行 */
 	overflow: hidden;
@@ -62,7 +49,7 @@
 	color: #999999;
 	font-size: 24rpx;
 	line-height: 33rpx;
-	width: 480rpx;
+	width: 440rpx;
 	margin-top: 10rpx;
 	
 	/* 限制两行 */
@@ -80,13 +67,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: #2979ff;
+	border: 2rpx solid #2979ff;
 	border-radius: 4rpx;
 	padding: 0 10rpx;
 	position: absolute;
 	bottom: 0;
 	
-	color: #FFFFFF;
+	color: #2979ff;
 	font-size: 30rpx;
 	line-height: 42rpx;
 	text-align: center;
@@ -96,14 +83,21 @@
 .list-cell-new-tag {
 	padding: 0 10rpx;
 	position: absolute;
-	right: 0;
-	bottom: 0;
+	top: 30%;
+	left: 0;
+	-webkit-transform: translateY(-30%);
+	        transform: translateY(-30%);
 	
-	color: #fa3534;
+	/* color: #fa3534; */
+	color: #fff;
 	font-size: 30rpx;
 	line-height: 42rpx;
 	font-weight: bold;
 	text-align: center;
+	text-shadow: 0 0 1rpx #EBEBEB;
+	background: rgba(0,0,0,.6);	
+	border-bottom-right-radius: 40rpx;
+	border-top-right-radius: 40rpx;
 }
 .slot-wrap {
 	display: flex;
