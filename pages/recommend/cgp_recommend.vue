@@ -18,7 +18,7 @@
 
 			<!-- 图片轮播 -->
 			<u-swiper :list="bannerList" :title="true" effect3d="true" previousMargin="30rpx" nextMargin="30rpx"
-				@click="swiperClick"></u-swiper>
+				bgColor="#fff" @click="swiperClick"></u-swiper>
 		</view>
 
 		<!-- 列表 -->
