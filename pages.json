@@ -49,7 +49,8 @@
 				{
 					"path":"recommend_search/cgp_recommend_search",
 					"style": {
-						"navigationBarTitleText":"搜索"
+						"navigationBarTitleText":"搜索",
+						"navigationStyle":"custom"
 					}
 				}
 			]

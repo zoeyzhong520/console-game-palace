@@ -3,29 +3,21 @@
 	<view class="container">
 		<u-navbar :is-back="false" :border-bottom="false">
 			<!-- 导航搜索 -->
-			<u-search class="slot-wrap" placeholder="请输入游戏名称" action-text="筛选" :disabled="true" @custom="show = true"
+			<u-search class="slot-wrap" placeholder="搜索" :showAction="true" action-text="筛选" :disabled="true" @custom="show = true"
 				@click="searchClick"></u-search>
 		</u-navbar>
 
 		<!-- 吸顶 -->
 		<u-tabs class="sticky" :list="tabsList" :current="current" @change="tabsChange"></u-tabs>
-
-		<!-- Popup 弹出层 -->
-		<u-popup v-model="show" mode="top" :closeable="true" close-icon-pos="bottom-right">
-			<u-gap :height="statusNavBarH" bg-color="#fff"></u-gap>
-
-			<u-grid :col="3">
-				<u-grid-item v-for="(item,index) in tabsList" :key="index" :index="index" @click="gridClick">
-					<view class="grid-text">{{ item.name }}</view>
-				</u-grid-item>
-			</u-grid>
-		</u-popup>
 		
+		<!-- Popup 弹出层 -->
+		<screeningPopup :show="show" :array="tabsList" @close="show = false" @click="tabsChange" />
+
 		<view v-show="current == 0">
-			<u-gap height="80" bg-color="#fff"></u-gap>
+			<u-gap height="118" bg-color="#fff"></u-gap>
 
 			<!-- 图片轮播 -->
-			<u-swiper :list="bannerList" :title="true" :effect3d="false" border-radius="0" :height="388"
+			<u-swiper :list="bannerList" :title="true" effect3d="true" previousMargin="30rpx" nextMargin="30rpx"
 				@click="swiperClick"></u-swiper>
 		</view>
 
@@ -39,8 +31,6 @@
 					<text class="list-cell-title">{{ item.title }}</text>
 					<!-- 简介 -->
 					<text class="list-cell-description">{{ item.description }}</text>
-					<!-- 阅读全文 -->
-					<!-- <view class="list-cell-check-detail">阅读全文</view> -->
 				</view>
 				<!-- 新上架标识 -->
 				<text v-if="item.isNew" class="list-cell-new-tag">New</text>
@@ -66,8 +56,13 @@
 	import {
 		mapMutations
 	} from 'vuex' // 使用Vuex
+
+	import screeningPopup from './components/cgp_recommend_popup.vue'
 	
 	export default {
+		components: {
+			screeningPopup,
+		},
 		data() {
 			return {
 				// tabs标签数组
@@ -110,8 +105,6 @@
 					Q: [],
 					R: []
 				},
-				// 导航栏高度
-				statusNavBarH: 0,
 				// 当前页数【字典元素分别对应不同标签】
 				pages: {
 					ALL: 0,
@@ -178,55 +171,36 @@
 				// 是否分享打开
 				this.isShare = true
 			}
-
-			// tabs标签数组
-			this.tabsList = cgp_recommend_tabsList
-
-			// 新增一行记录 设备ID
-			this.insertDeviceId()
-
-			// 获取配置信息
-			this.getConfigs()
-
-			// 获取广告位数据
-			cgp_recommend_banner_list(this.Bmob).then((res) => {
-				uni.stopPullDownRefresh()
-
-				this.bannerList = res
-			})
-
-			// 获取今天是X年X月X日
-			this.todayTime = this.$u.timeFormat(new Date().getTime(), 'yyyy-mm-dd hh:MM:ss')
-
-			// 获取全部推荐数据
-			cgp_recommend_all_list(this.Bmob, 0).then((res) => {
-				uni.stopPullDownRefresh()
-
-				this.list = res
-
-				this.list.map((item) => {
-					// 筛选出3天内更新的游戏
-					if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
-						// 设置新上架的标识
-						item.isNew = true
-					}
-				})
-
-				this.allData.ALL = this.list
-			})
-
-			// 获取导航栏高度
-			const sysInfo = uni.getSystemInfoSync()
-			this.statusNavBarH = (sysInfo.statusBarHeight + 44) * 2
 			
-			// 显示 tabBar 某一项的右上角的红点
-			uni.showTabBarRedDot({
-				index:2
-			})
+			this.init()
 		},
 
 		methods: {
-			...mapMutations(['setIsInReview', 'setGamesCount', 'setDeviceIdsObjectId', 'setSearchFlag', 'setArticlesCount']),
+			...mapMutations(['setIsInReview', 'setGamesCount', 'setDeviceIdsObjectId', 'setSearchFlag',
+				'setArticlesCount'
+			]),
+			
+			// 初始化
+			init() {
+				// 获取今天是X年X月X日
+				this.todayTime = this.$u.timeFormat(new Date().getTime(), 'yyyy-mm-dd hh:MM:ss')
+				
+				// tabs标签数组
+				this.tabsList = cgp_recommend_tabsList
+				this.tabsList.map((item, index) => {
+					item.isSelect = index == 0 // 默认选中第一项
+				})
+				
+				// 显示 tabBar 某一项的右上角的红点
+				uni.showTabBarRedDot({
+					index: 2
+				})
+				
+				// HTTP
+				this.getConfigs() // 获取配置信息
+				this.insertDeviceId() // 新增一行记录 设备ID
+				this.getBannerAllRecommendList() // 获取全部推荐、广告
+			},
 			
 			// 新增一行记录 设备ID
 			insertDeviceId() {
@@ -254,47 +228,69 @@
 					this.setIsInReview(res[0].isInReview)
 					this.setGamesCount(res[0].gamesCount)
 					this.setArticlesCount(res[0].articlesCount)
-					
+
 					// 缓存文章总数
 					if (!!!uni.getStorageSync('articlesCount')) {
 						uni.setStorageSync('articlesCount', res[0].articlesCount)
 					}
-					
+
 					// 为 tabBar 某一项的右上角添加文本
-					if (!!uni.getStorageSync('articlesCount') && res[0].articlesCount > uni.getStorageSync('articlesCount'))  {
+					if (!!uni.getStorageSync('articlesCount') && res[0].articlesCount > uni.getStorageSync(
+							'articlesCount')) {
 						uni.setTabBarBadge({
-							index:1,
-							text:''+(res[0].articlesCount-uni.getStorageSync('articlesCount'))
+							index: 1,
+							text: '' + (res[0].articlesCount - uni.getStorageSync('articlesCount'))
 						})
 					}
+				})
+			},
+			
+			// 获取广告、全部推荐
+			async getBannerAllRecommendList() {
+				await this.getAllRecommendList()
+				await this.getBannerList()
+			},
+			
+			// 获取广告位
+			getBannerList() {
+				cgp_recommend_banner_list(this.Bmob).then((res) => {
+					uni.stopPullDownRefresh()
+					this.bannerList = res
+				})
+			},
+			
+			// 获取全部推荐
+			getAllRecommendList() {
+				uni.showLoading()
+				cgp_recommend_all_list(this.Bmob, 0).then((res) => {
+					uni.stopPullDownRefresh()
+					uni.hideLoading()
+				
+					this.list = res
+				
+					this.list.map((item) => {
+						// 筛选出3天内更新的游戏
+						if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
+							// 设置新上架的标识
+							item.isNew = true
+						}
+					})
+				
+					this.allData.ALL = this.list
+				}).catch(err => {
+					uni.hideLoading()
 				})
 			},
 
 			// tabs 标签切换
 			tabsChange(index) {
 				this.current = index;
-
+				
 				this.filterList(index)
 
 				// 设置标签的滚动位置
 				uni.pageScrollTo({
 					scrollTop: this.pageScrollArr[cgp_recommend_types[index]],
-					duration: 0
-				})
-			},
-
-			// 点击筛选菜单的某项
-			gridClick(index) {
-				this.current = index;
-
-				this.filterList(index)
-
-				// 关闭 Popup 弹出层
-				this.show = false
-
-				// 页面滚动到顶部
-				uni.pageScrollTo({
-					scrollTop: 0,
 					duration: 0
 				})
 			},
@@ -427,7 +423,7 @@
 			var type = cgp_recommend_types[this.current]
 			this.pageScrollArr[type] = e.scrollTop
 		},
-		
+
 		onTabItemTap() {
 			uni.vibrateShort()
 		},

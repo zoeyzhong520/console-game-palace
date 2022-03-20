@@ -96,6 +96,8 @@ export const cgp_recommend_all_list = function(Bmob, page) {
 		query.find().then(res => {
 			// console.log(res)
 			resolve(res)
+		}).catch(err => {
+			reject(err)
 		});
 
 	})

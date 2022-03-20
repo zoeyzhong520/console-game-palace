@@ -98,13 +98,14 @@
 	border-top-right-radius: 40rpx;
 }
 
+/* 导航栏-搜索框 */
 .slot-wrap {
 	display: flex;
-	align-items: center;
+	align-items: center;	
 	/* 如果您想让slot内容占满整个导航栏的宽度 */
-	/* flex: 1; */
+	flex: 1;
 	/* 如果您想让slot内容与导航栏左右有空隙 */
-	padding: 20rpx 30rpx;
+	padding: 20rpx;
 }
 
 .sticky {
@@ -115,8 +116,6 @@
 	z-index: 1;
 }
 
-.grid-text {
-	font-size: 28rpx;
-	margin-top: 4rpx;
-	color: $u-type-info;
-}
+
+
+

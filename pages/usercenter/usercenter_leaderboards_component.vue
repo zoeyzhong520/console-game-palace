@@ -1,9 +1,14 @@
 <template>
 	<!-- 游戏排行榜组件 -->
 	<view class="usercenter-leaderboards-container">
+		
 		<view class="usercenter-leaderboards-box">
-			<view @click="leaderboarderClick(item,index)" :style="{'background': 'rgb'+item.background}" class="usercenter-leaderboards-box-item" v-for="(item,index) in data" :key="index">
-				{{ item.title }}
+			<view
+				@click="leaderboarderClick(item,index)"
+				class="usercenter-leaderboards-box-item"
+				v-for="(item,index) in data"
+				:key="index">
+				{{ `${item.title}排行榜` }}
 			</view>
 		</view>
 	</view>

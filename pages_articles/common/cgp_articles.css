@@ -41,14 +41,15 @@
 
 /* 新上架标识 */
 .list-cell-new-tag {
+	margin-top: 10rpx;
 	padding: 0 10rpx;
 	position: absolute;
 	right: 0;
 	top: 0;
-	background: rgba(0, 0, 0, 0.3);
-	border-radius: 0 8rpx 0 8rpx;
+	background: rgba(0, 0, 0, 0.6);
+	border-radius: 40rpx 0 0 40rpx;
 	
-	color: #fa3534;
+	color: #fff;
 	font-size: 30rpx;
 	line-height: 42rpx;
 	font-weight: bold;

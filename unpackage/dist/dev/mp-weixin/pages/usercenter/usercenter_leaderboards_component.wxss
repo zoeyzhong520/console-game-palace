@@ -2,7 +2,6 @@
 .usercenter-leaderboards-container {
 	display: flex;
 	position: relative;
-	padding-bottom: 30rpx;
 }
 .usercenter-leaderboards-box {
 	display: flex;
@@ -13,20 +12,43 @@
 	margin-left: 30rpx;
 	margin-bottom: 30rpx;
 	width: 330rpx;
-	height: 140rpx;
-	background: #F5F6F7;
+	height: 88rpx;
 	border-radius: 16rpx;
+	background: #EBEBEB;
+	-webkit-animation: scale .5s forwards;
+	        animation: scale .5s forwards;
 	
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	position: relative;
 	
-	font-size: 50rpx;
-	line-height: 70rpx;
-	color: #FFFFFF;
-	font-weight: bold;
+	font-size: 30rpx;
+	color: #666;
 	text-align: center;
-	text-shadow: #909399 3rpx 3rpx 3rpx;
+}
+@-webkit-keyframes scale{
+0% {
+		-webkit-transform: scale(0);
+		        transform: scale(0);
+		opacity: 0;
+}
+100% {
+		-webkit-transform: scale(1);
+		        transform: scale(1);
+		opacity: 1;
+}
+}
+@keyframes scale{
+0% {
+		-webkit-transform: scale(0);
+		        transform: scale(0);
+		opacity: 0;
+}
+100% {
+		-webkit-transform: scale(1);
+		        transform: scale(1);
+		opacity: 1;
+}
 }
 
