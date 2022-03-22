@@ -2,6 +2,7 @@
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
+			this.init() // 初始化
 		},
 		
 		onShow: function() {
@@ -13,7 +14,10 @@
 		},
 		
 		methods: {
-			
+			// 初始化
+			init() {
+				
+			}
 		}
 	}
 </script>

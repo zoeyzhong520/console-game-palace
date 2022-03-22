@@ -1,0 +1,1 @@
+<view class="login-page data-v-4c9cb3c4"><image src="../static/logo.png" mode="aspectFit" class="data-v-4c9cb3c4"></image><u-button vue-id="46fa45c2-1" shape="circle" type="primary" data-event-opts="{{[['^click',[['login']]]]}}" bind:click="__e" class="data-v-4c9cb3c4" bind:__l="__l" vue-slots="{{['default']}}">一键登录</u-button></view>

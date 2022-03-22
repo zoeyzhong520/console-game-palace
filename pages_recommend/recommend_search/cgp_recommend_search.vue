@@ -97,7 +97,7 @@
 						}
 
 						// 缓存下数据
-						this.setStorage(all_data_cached_key, this.allData).then((res) => {})
+						// this.setStorage(all_data_cached_key, this.allData).then((res) => {})
 
 						if (i == maxCount) {
 							uni.hideLoading()

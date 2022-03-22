@@ -197,6 +197,7 @@
 				})
 				
 				// HTTP
+				this.upUserInfo(this)
 				this.getConfigs() // 获取配置信息
 				this.insertDeviceId() // 新增一行记录 设备ID
 				this.getBannerAllRecommendList() // 获取全部推荐、广告

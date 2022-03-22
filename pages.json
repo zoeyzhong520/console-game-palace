@@ -27,6 +27,17 @@
 	
 	"subPackages": [
 		{
+			"root":"pages_login",
+			"pages":[
+				{
+					"path":"login/login",
+					"style":{
+						"navigationBarTitleText":"登陆"
+					}
+				}
+			]
+		},
+		{
 			"root":"pages_articles",
 			"pages": [
 				{
@@ -75,12 +86,22 @@
 					"style": {
 						"navigationBarTitleText":""
 					}
+				},
+				{
+					"path":"usercenter_setting/usercenter_setting",
+					"style": {
+						"navigationBarTitleText":"设置"
+					}
 				}
 			]
 		}
 	],
 	
 	"preloadRule": {
+		"pages_login/login/login": {
+			"network": "all",
+			"packages": ["__APP__"]
+		},
 		"pages_articles/articles_detail/cgp_articles_detail": {
 			"network": "all",
 			"packages": ["__APP__"]
@@ -103,6 +124,10 @@
 			"packages": ["__APP__"]
 		},
 		"pages_usercenter/usercenter_leaderboards/leaderboards_list/leaderboards_list": {
+			"network": "all",
+			"packages": ["__APP__"]
+		},
+		"pages_usercenter/usercenter_setting/usercenter_setting": {
 			"network": "all",
 			"packages": ["__APP__"]
 		}

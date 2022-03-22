@@ -94,3 +94,21 @@ export const color16Random = function() { //十六进制颜色随机
 	var color = '#' + r.toString(16) + g.toString(16) + b.toString(16);
 	return color;
 }
+
+/**
+ * @description 更新用户信息
+ * @param {type} obj 
+ */
+export const upUserInfo = function(obj) {
+	const bmobInfo = uni.getStorageSync('bmob')
+	obj.$store.commit('setUserInfo', !!bmobInfo ? JSON.parse(bmobInfo) : null) // 把用户信息存储到全局
+}
+
+/**
+ * @description 判断时间戳是否是今天
+ * @param {Number} str 
+ * @return {Boolean}
+ */
+export const isToday = function(str) {
+	return new Date().getTime() - new Date(str).getTime() < 86400000;
+}

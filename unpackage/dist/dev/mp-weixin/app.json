@@ -6,6 +6,12 @@
   ],
   "subPackages": [
     {
+      "root": "pages_login",
+      "pages": [
+        "login/login"
+      ]
+    },
+    {
       "root": "pages_articles",
       "pages": [
         "articles_detail/cgp_articles_detail"
@@ -23,7 +29,8 @@
       "pages": [
         "usercenter_join/usercenter_join",
         "usercenter_about/usercenter_about",
-        "usercenter_leaderboards/leaderboards_list/leaderboards_list"
+        "usercenter_leaderboards/leaderboards_list/leaderboards_list",
+        "usercenter_setting/usercenter_setting"
       ]
     }
   ],
@@ -58,6 +65,12 @@
     ]
   },
   "preloadRule": {
+    "pages_login/login/login": {
+      "network": "all",
+      "packages": [
+        "__APP__"
+      ]
+    },
     "pages_articles/articles_detail/cgp_articles_detail": {
       "network": "all",
       "packages": [
@@ -93,8 +106,13 @@
       "packages": [
         "__APP__"
       ]
+    },
+    "pages_usercenter/usercenter_setting/usercenter_setting": {
+      "network": "all",
+      "packages": [
+        "__APP__"
+      ]
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }

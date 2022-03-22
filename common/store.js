@@ -19,6 +19,11 @@ export const store = new Vuex.Store({
 		joinRewardedVideoAdFlag: false,
 		// 文章总数
 		articlesCount: 0,
+		// 用户信息
+		userInfo: null,
+		// 用户称号字体颜色
+		userLevelColor: 'gray',
+		levelColors: ['gray','gray','orange','orange','yellow','yellow','green','green','blue','pink','purple'],
 	},
 	
 	mutations: {
@@ -56,6 +61,19 @@ export const store = new Vuex.Store({
 		setArticlesCount(state, provider) {
 			// console.log('文章总数:',provider)
 			state.articlesCount = provider
+		},
+		
+		// 用户信息
+		setUserInfo(state, provider) {
+			console.log('用户信息:',provider)
+			state.userInfo = provider
+			
+			if (!!state.userInfo) {
+				// 等级称号字体颜色
+				let divisionRes = Math.floor(state.userInfo.signin/30)
+				state.userLevelColor = state.levelColors[divisionRes]
+				console.log('用户称号字体颜色：', state.userLevelColor)
+			}
 		},
 	}
 	
