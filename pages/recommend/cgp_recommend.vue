@@ -4,7 +4,7 @@
 		<u-navbar :is-back="false" :border-bottom="false">
 			<!-- 导航搜索 -->
 			<u-search class="slot-wrap" placeholder="搜索" :showAction="true" action-text="筛选" :disabled="true" @custom="show = true"
-				@click="searchClick"></u-search>
+				@click="$u.route('/pages_recommend/recommend_search/cgp_recommend_searchHistory')"></u-search>
 		</u-navbar>
 
 		<!-- 吸顶 -->
@@ -409,14 +409,7 @@
 					url: '../../pages_recommend/recommend_detail/cgp_recommend_detail?detailInfo=' +
 						encodeURIComponent(JSON.stringify(item))
 				})
-			},
-
-			// 点击搜索框
-			searchClick() {
-				uni.navigateTo({
-					url: '../../pages_recommend/recommend_search/cgp_recommend_search'
-				})
-			},
+			}
 		},
 
 		onShareAppMessage() {

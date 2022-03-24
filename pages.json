@@ -63,6 +63,13 @@
 						"navigationBarTitleText":"搜索",
 						"navigationStyle":"custom"
 					}
+				},
+				{
+					"path":"recommend_search/cgp_recommend_searchHistory",
+					"style": {
+						"navigationBarTitleText":"搜索",
+						"navigationStyle":"custom"
+					}
 				}
 			]
 		},
@@ -111,6 +118,10 @@
 			"packages": ["__APP__"]
 		},
 		"pages_recommend/recommend_search/cgp_recommend_search": {
+			"network": "all",
+			"packages": ["__APP__"]
+		},
+		"pages_recommend/recommend_search/cgp_recommend_searchHistory": {
 			"network": "all",
 			"packages": ["__APP__"]
 		},

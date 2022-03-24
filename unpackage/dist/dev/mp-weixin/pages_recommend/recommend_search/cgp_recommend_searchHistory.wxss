@@ -148,12 +148,12 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.search-history.data-v-3556f6b6 {
+.search-history.data-v-513b59a4 {
   display: flex;
   flex-wrap: wrap;
   padding: 30rpx;
 }
-.search-history-item.data-v-3556f6b6 {
+.search-history-item.data-v-513b59a4 {
   padding: 5rpx 10rpx;
   margin-right: 20rpx;
   margin-bottom: 20rpx;
@@ -161,7 +161,7 @@
   color: #666;
   background: #EBEBEB;
 }
-.search-history-item.data-v-3556f6b6:last-child {
+.search-history-item.data-v-513b59a4:last-child {
   margin-right: 0;
 }
 

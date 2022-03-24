@@ -21,7 +21,8 @@
       "root": "pages_recommend",
       "pages": [
         "recommend_detail/cgp_recommend_detail",
-        "recommend_search/cgp_recommend_search"
+        "recommend_search/cgp_recommend_search",
+        "recommend_search/cgp_recommend_searchHistory"
       ]
     },
     {
@@ -84,6 +85,12 @@
       ]
     },
     "pages_recommend/recommend_search/cgp_recommend_search": {
+      "network": "all",
+      "packages": [
+        "__APP__"
+      ]
+    },
+    "pages_recommend/recommend_search/cgp_recommend_searchHistory": {
       "network": "all",
       "packages": [
         "__APP__"

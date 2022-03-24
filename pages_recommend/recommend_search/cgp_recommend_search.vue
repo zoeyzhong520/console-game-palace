@@ -2,10 +2,10 @@
 	<!-- CGP 筛选页 -->
 	<view class="">
 		<u-navbar :autoBack="true">
-			<u-search class="slot-wrap" placeholder="请输入游戏名称" v-model="keyword" :focus="true" :showAction="false"
+			<u-search class="slot-wrap" placeholder="请输入游戏名称" v-model="keyword" :focus="true" :showAction="true" @custom="startSearch()"
 				@search="startSearch"></u-search>
 		</u-navbar>
-
+		
 		<!-- 列表 -->
 		<view class="list-cell" v-for="(item, index) in list" :key="index" @click="listClick(item)">
 			<!-- 图片 -->
@@ -23,7 +23,7 @@
 		</view>
 		
 		<!-- 视频广告 -->
-		<ad unit-id="adunit-34e2b370403d64f8" ad-type="video" ad-theme="white"></ad>
+		<!-- <ad unit-id="adunit-34e2b370403d64f8" ad-type="video" ad-theme="white"></ad> -->
 	</view>
 </template>
 
@@ -45,7 +45,6 @@
 	export default {
 		watch: {
 			keyword(val) {
-				// console.log(val)
 				this.startSearch()
 			}
 		},
@@ -62,6 +61,7 @@
 		},
 
 		onLoad(e) {
+			this.keyword = e.keyword ? e.keyword : ''
 			this.init() // 初始化
 		},
 
@@ -162,4 +162,8 @@
 
 <style>
 	@import url("../common/cgp_recommend.css");
+</style>
+
+<style lang="scss" scoped>
+	@import './cgp_recommend_search.scss';
 </style>
