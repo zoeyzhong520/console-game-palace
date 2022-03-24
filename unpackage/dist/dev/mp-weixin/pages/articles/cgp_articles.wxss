@@ -42,13 +42,12 @@ page {
 
 /* 新上架标识 */
 .list-cell-new-tag {
-	margin-top: 10rpx;
 	padding: 0 10rpx;
 	position: absolute;
-	right: 0;
+	left: 0;
 	top: 0;
 	background: rgba(0, 0, 0, 0.6);
-	border-radius: 40rpx 0 0 40rpx;
+	border-radius: 0 40rpx 40rpx 0;
 	
 	color: #fff;
 	font-size: 30rpx;

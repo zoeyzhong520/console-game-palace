@@ -25,7 +25,7 @@
 		<view :style="{'margin-top': current > 0 ? '80rpx' : ''}">
 			<view class="list-cell" v-for="(item, index) in list" :key="index" @click="listClick(item)">
 				<!-- 图片 -->
-				<u-image :src="item.image" width="220rpx" height="140rpx" borderRadius="8rpx"></u-image>
+				<u-image :src="item.image" width="230rpx" height="156rpx" borderRadius="8rpx"></u-image>
 				<view style="display: flex;flex-direction: column;position: relative;">
 					<!-- 标题 -->
 					<text class="list-cell-title">{{ item.title }}</text>
@@ -34,6 +34,8 @@
 				</view>
 				<!-- 新上架标识 -->
 				<text v-if="item.isNew" class="list-cell-new-tag">New</text>
+				<!-- video标识 -->
+				<text v-if="item.videoPath && item.videoPath.length > 0" class="list-cell-video-tag">▷</text>
 			</view>
 		</view>
 		<!-- NoNetwork 无网络提示 -->
@@ -225,11 +227,22 @@
 			// 获取配置信息
 			getConfigs() {
 				cgp_configs(this.Bmob).then((res) => {
-					// console.log(res)
+					// 非审核状态，自动打开调试
+					uni.setEnableDebug({
+						enableDebug: !res[0].isInReview
+					}) 
+					
 					this.setIsInReview(res[0].isInReview)
 					this.setGamesCount(res[0].gamesCount)
 					this.setArticlesCount(res[0].articlesCount)
 
+					// 缓存游戏总数
+					if (!!uni.getStorageSync('gamesCount') && res[0].gamesCount > uni.getStorageSync(
+							'gamesCount')) {
+						// 本地游戏总数小于服务端，就把本地游戏缓存清空
+						uni.setStorageSync('gamesCount', null)
+					}
+					
 					// 缓存文章总数
 					if (!!!uni.getStorageSync('articlesCount')) {
 						uni.setStorageSync('articlesCount', res[0].articlesCount)

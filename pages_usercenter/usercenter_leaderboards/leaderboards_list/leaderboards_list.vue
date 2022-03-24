@@ -7,7 +7,7 @@
 		<!-- 列表 -->
 		<view class="list-cell" v-for="(item, index) in list" :key="index" @click="listClick(item)">
 			<!-- 图片 -->
-			<u-image :src="item.image" width="220rpx" height="140rpx" borderRadius="8rpx"></u-image>
+			<u-image :src="item.image" width="230rpx" height="156rpx" borderRadius="8rpx"></u-image>
 				<!-- 排行榜标识 -->
 				<text class="list-cell-new-tag">
 					{{ 'Top'+(index+1) }}
@@ -18,9 +18,9 @@
 				<text class="list-cell-title">{{ item.title }}</text>
 				<!-- 简介 -->
 				<text class="list-cell-description">{{ item.description }}</text>
-				<!-- 阅读全文 -->
-				<!-- <view class="list-cell-check-detail">阅读全文</view> -->
 			</view>
+			<!-- video标识 -->
+			<text v-if="item.videoPath && item.videoPath.length > 0" class="list-cell-video-tag">▷</text>
 		</view>
 	</view>
 </template>
