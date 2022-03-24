@@ -7,7 +7,7 @@
 		<!-- 列表 -->
 		<view class="list-cell" v-for="(item, index) in list" :key="index" @click="listClick(item)">
 			<!-- 图片 -->
-			<image class="list-cell-image" :src="item.image" mode="aspectFill">
+			<u-image :src="item.image" width="220rpx" height="140rpx" borderRadius="8rpx"></u-image>
 				<!-- 排行榜标识 -->
 				<text class="list-cell-new-tag">
 					{{ 'Top'+(index+1) }}

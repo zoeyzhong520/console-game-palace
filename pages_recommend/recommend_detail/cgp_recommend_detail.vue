@@ -8,8 +8,16 @@
 			<text class="recommend-detail-title">{{ detailInfo.title }}</text>
 		</view>
 		
+		<!-- 游戏视频 -->
+		<view class="recommend-detail-box" v-if="detailInfo.videoPath && detailInfo.videoPath.length > 0">
+			<u-section title="介绍视频" color="#2979ff" :right="false"></u-section>
+			<video :src="detailInfo.videoPath" controls
+			 :title="detailInfo.title" objectFit="cover"
+			@error="videoErrorCallback"></video>
+		</view>
+		
 		<!-- 游戏简介 -->
-		<view class="recommend-detail-box">
+		<view class="recommend-detail-box" v-if="detailInfo.description && detailInfo.description.length > 0">
 			<u-section title="游戏简介" color="#2979ff" :right="false"></u-section>
 			<view style="padding-top: 30rpx;">
 				<text class="recommend-detail-description">{{ detailInfo.description }}</text>
@@ -17,7 +25,7 @@
 		</view>
 
 		<!-- 游戏截图 -->
-		<view class="recommend-detail-box">
+		<view class="recommend-detail-box" v-if="detailInfo.imageList && detailInfo.imageList.length > 0">
 			<u-section title="游戏截图" color="#2979ff" :right="false"></u-section>
 			<view style="padding-top: 30rpx;">
 				<u-lazy-load v-for="(item, index) in detailInfo.imageList" :key="index" :image="item"
@@ -26,7 +34,7 @@
 		</view>
 
 		<!-- 系统需求 -->
-		<view class="recommend-detail-box" v-if="detailInfo.requirements">
+		<view class="recommend-detail-box" v-if="detailInfo.requirements && detailInfo.requirements.length > 0">
 			<u-section title="系统需求" color="#2979ff" :right="false"></u-section>
 			<view style="padding-top: 30rpx;">
 				<text class="recommend-detail-description">{{ detailInfo.requirements }}</text>
@@ -37,9 +45,9 @@
 		<ad unit-id="adunit-3e6f2246eecabc7d" ad-type="video" ad-theme="white"></ad>
 		
 		<!-- 资源地址 -->
-		<view class="recommend-detail-box" v-if="!cgp_isInReview && detailInfo.resources">
+		<view class="recommend-detail-box" v-if="!cgp_isInReview && !!detailInfo.resources">
 			<u-section title="资源地址" color="#2979ff" :right="false"></u-section>
-			<view style="padding-top: 30rpx;" v-if="hasPermission">
+			<view style="padding-top: 30rpx;" v-if="hasPermission || isUserHighLevel">
 				<u-parse :html="detailInfo.resources" :tag-style="style" :lazy-load="true" :show-with-animation="true"
 					:use-cache="true"></u-parse>
 					
@@ -54,7 +62,7 @@
 			</view>
 			
 			<!-- 无查看权限，点击调起分享 -->
-			<view style="padding-top: 30rpx;" v-if="!hasPermission">
+			<view style="padding-top: 30rpx;" v-if="!hasPermission && !isUserHighLevel">
 				<!-- 分享规则 -->
 				<text class="recommend-detail-share-rule">分享规则：点击分享按钮发送给给任一未使用过该小程序的好友，好友成功打开分享的卡片后，即可查看下载链接，自己分享给自己无效</text>
 				<u-gap height="30" bg-color="#fff"></u-gap>
@@ -100,10 +108,14 @@
 			// 根据设备ID合集主键 objectId 获取一行记录
 			recommend_detail_getRecord_with_objectId(this.Bmob, this.store.state.deviceIdsObjectId).then(res => {
 				this.hasPermission = res.hasPermission
+			}).catch(err => {
+				
 			})
 			
 			// 根据主键修改一行记录
 			recommend_detail_editRecord_with_objectId(this.Bmob, this.detailInfo.objectId).then(res => {
+				
+			}).catch(err => {
 				
 			})
 		},
@@ -113,6 +125,10 @@
 			cgp_isInReview() {
 				return this.store.state.isInReview
 			},
+			// 用户是否拥有高级称号（斗尊、斗圣、斗帝 sign >= 240）
+			isUserHighLevel() {
+				return !!this.$store.state.userInfo && this.$store.state.userInfo.signin >= 240
+			}
 		},
 
 		methods: {
@@ -127,6 +143,9 @@
 					current: index
 				})
 			},
+			videoErrorCallback(err) {
+				console.log(JSON.stringify(err))
+			}
 		},
 		
 		onShareAppMessage() {

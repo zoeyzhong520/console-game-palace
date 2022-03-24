@@ -24,6 +24,7 @@
 					cancelText:'取消',
 					success(res) {
 						if (res.confirm) {
+							uni.setStorageSync('signin', null)
 							uni.setStorageSync('bmob', null)
 							_this.upUserInfo(_this)
 							uni.navigateBack()

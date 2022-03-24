@@ -36,18 +36,17 @@
   padding: 30rpx;
 }
 .cgp-usercenter-page-avatar .r.data-v-4158f059 {
-  margin-top: -10rpx;
   margin-left: 30rpx;
   width: 450rpx;
 }
 .cgp-usercenter-page-avatar .r text.data-v-4158f059 {
   display: block;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 32rpx;
 }
-.cgp-usercenter-page-avatar .r .level.data-v-4158f059 {
-  font-size: 22rpx;
-  text-shadow: 0 0 1rpx #ccc;
+.cgp-usercenter-page-avatar .r text.data-v-4158f059:last-child {
+  font-size: 26rpx;
 }
 .cgp-usercenter-page-avatar .signin.data-v-4158f059 {
   position: absolute;

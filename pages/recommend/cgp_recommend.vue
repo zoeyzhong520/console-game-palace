@@ -11,7 +11,7 @@
 		<u-tabs class="sticky" :list="tabsList" :current="current" @change="tabsChange"></u-tabs>
 		
 		<!-- Popup 弹出层 -->
-		<screeningPopup :show="show" :array="tabsList" @close="show = false" @click="tabsChange" />
+		<screeningPopup :show="show" :array="tabsList" :current="current" @close="show = false" @click="tabsChange" />
 
 		<view v-show="current == 0">
 			<u-gap height="118" bg-color="#fff"></u-gap>
@@ -25,7 +25,7 @@
 		<view :style="{'margin-top': current > 0 ? '80rpx' : ''}">
 			<view class="list-cell" v-for="(item, index) in list" :key="index" @click="listClick(item)">
 				<!-- 图片 -->
-				<image class="list-cell-image" :src="item.image" mode="aspectFill"></image>
+				<u-image :src="item.image" width="220rpx" height="140rpx" borderRadius="8rpx"></u-image>
 				<view style="display: flex;flex-direction: column;position: relative;">
 					<!-- 标题 -->
 					<text class="list-cell-title">{{ item.title }}</text>

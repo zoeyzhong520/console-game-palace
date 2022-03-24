@@ -3,10 +3,12 @@
 	<view class="cgp-usercenter-page">
 		<!-- 用户头像 -->
 		<view class="cgp-usercenter-page-avatar" @click="!!!userInfo ? $u.route('/pages_login/login/login') : ''">
-			<u-avatar :src="!!userInfo && !!userInfo.userPic ? userInfo.userPic : ''"></u-avatar>
-			<view class="r">
+			<u-image
+			 :src="!!userInfo && !!userInfo.userPic ? userInfo.userPic : ''"
+			  width="80rpx" height="80rpx" shape="circle" borderRadius="40rpx" errorIcon="account"></u-image>
+			<view class="r" :style="{'color': !!userInfo ? userLevelColor : ''}">
 				<text>{{!!userInfo && !!userInfo.userPic ? userInfo.nickName : '立即登录'}}</text>
-				<text class="level" :style="{'color': userLevelColor}">{{!!userInfo && !!userInfo.level ? userInfo.level : '登录查看级别'}}</text>
+				<text>{{!!userInfo && !!userInfo.level ? userInfo.level : '登录查看级别'}}</text>
 			</view>
 			<!-- 签到 -->
 			<u-button class="signin" type="error" size="mini" :plain="!isSignIn" shape="circle"
@@ -41,6 +43,8 @@
 				userInfo: null,
 				// 签到标记
 				isSignIn: false,
+				// 等级称号字体颜色
+				userLevelColor: '',
 				// cell单元格数组
 				cellTitles: [{
 						title: '加入',
@@ -76,13 +80,8 @@
 		onShow() {
 			this.userInfo = this.$store.state.userInfo // 配置用户信息
 			this.isSignIn = !!uni.getStorageSync('signin') && this.isToday(uni.getStorageSync('signin')) // 签到标记
-		},
-		
-		computed: {
-			// 等级称号字体颜色
-			userLevelColor() {
-				return this.$store.state.userLevelColor
-			}
+			console.log('签到标记：',this.isSignIn)
+			this.userLevelColor = this.$store.state.userLevelColor // 等级称号字体颜色
 		},
 
 		methods: {

@@ -10,6 +10,11 @@
 	padding: 30rpx 0;
 	position: relative;
 }
+.recommend-detail-box video {
+	margin-top: 30rpx;
+	width: 690rpx;
+	height: 400rpx;
+}
 .recommend-detail-title {
 	font-size: 50rpx;
 	line-height: 70rpx;

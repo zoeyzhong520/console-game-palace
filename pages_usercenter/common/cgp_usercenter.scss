@@ -10,20 +10,20 @@
 		padding: 30rpx;
 		
 		.r {
-			margin-top: -10rpx;
 			margin-left: 30rpx;
 			width: 450rpx;
 			
 			text {
 				display: block;
 				white-space: nowrap;
-				font-weight: 500;
+				font-weight: 400;
+				font-size: 32rpx;				
 			}
 			
-			.level {
-				font-size: 22rpx;
-				text-shadow: 0 0 1rpx #ccc;
+			text:last-child {
+				font-size: 26rpx;
 			}
+			
 		}
 		
 		.signin {

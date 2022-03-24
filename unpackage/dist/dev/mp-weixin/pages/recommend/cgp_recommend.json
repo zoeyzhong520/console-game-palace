@@ -7,6 +7,7 @@
     "u-tabs": "/uview-ui/components/u-tabs/u-tabs",
     "u-gap": "/uview-ui/components/u-gap/u-gap",
     "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
+    "u-image": "/uview-ui/components/u-image/u-image",
     "u-no-network": "/uview-ui/components/u-no-network/u-no-network",
     "screening-popup": "/pages/recommend/components/cgp_recommend_popup"
   }

@@ -9,7 +9,7 @@
 		<!-- 列表 -->
 		<view class="list-cell" v-for="(item, index) in list" :key="index" @click="listClick(item)">
 			<!-- 图片 -->
-			<image class="list-cell-image" :src="item.image" mode="aspectFill"></image>
+			<u-image :src="item.image" width="220rpx" height="140rpx" borderRadius="8rpx"></u-image>
 			<view style="display: flex;flex-direction: column;position: relative;">
 				<!-- 标题 -->
 				<text class="list-cell-title">{{ item.title }}</text>

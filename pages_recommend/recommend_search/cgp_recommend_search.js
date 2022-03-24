@@ -5,6 +5,7 @@
  * @return {Array}           查询的结果
  */
 export const fuzzyQuery = function(list, keyWord) {
+	uni.showLoading()
 	var reg = new RegExp(keyWord);
 	var arr = [];
 	for (var i = 0; i < list.length; i++) {
@@ -12,6 +13,7 @@ export const fuzzyQuery = function(list, keyWord) {
 			arr.push(list[i]);
 		}
 	}
+	uni.hideLoading()
 	return arr;
 }
 

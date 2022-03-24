@@ -27,6 +27,11 @@
 			array: {
 				type: Array,
 				default: []
+			},
+			// 当前选中的
+			current: {
+				type: Number,
+				default: 0
 			}
 		},
 		watch: {
@@ -35,6 +40,12 @@
 			},
 			array(newVal) {
 				this.list = newVal
+			},
+			current(newVal) {
+				// 遍历数组
+				this.list.map((item, idx) => {
+					item.isSelect = idx == this.current
+				})
 			}
 		},
 		data() {
