@@ -154,12 +154,8 @@
   padding: 30rpx;
 }
 .search-history-item.data-v-3556f6b6 {
-  padding: 5rpx 10rpx;
   margin-right: 20rpx;
   margin-bottom: 20rpx;
-  border-radius: 8rpx;
-  color: #666;
-  background: #EBEBEB;
 }
 .search-history-item.data-v-3556f6b6:last-child {
   margin-right: 0;

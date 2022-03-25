@@ -12,7 +12,7 @@
 		<view class="recommend-detail-box" v-if="detailInfo.videoPath && detailInfo.videoPath.length > 0">
 			<u-section title="介绍视频" color="#2979ff" :right="false"></u-section>
 			<video :src="detailInfo.videoPath" controls
-			 :title="detailInfo.title" objectFit="cover"
+			 :title="detailInfo.title" objectFit="cover" :poster="detailInfo.image"
 			@error="videoErrorCallback"></video>
 		</view>
 		

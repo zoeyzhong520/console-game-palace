@@ -84,13 +84,26 @@ export const cgp_recommend_banner_list = function(Bmob) {
 	})
 }
 
-// 获取全部推荐数据
-export const cgp_recommend_all_list = function(Bmob, page) {
+/**
+ * @description 获取全部数据
+ * @param {Bmob} Bmob 
+ * @param {Number} page 
+ * @param {Boolean} updatedAt
+ * @param {Boolean} readCount 
+ */ 
+export const cgp_recommend_all_list = function(Bmob, page, updatedAt, readCount) {
 	return new Promise((resolve, reject) => {
 
 		const query = Bmob.Query('CGP_HotRecommend')
-		// 对createdAt字段降序排列
-		query.order("-createdAt")
+		if (updatedAt && readCount) {
+			query.order('-createdAt', '-readCount')
+		}
+		if (updatedAt && !readCount) {
+			query.order('-createdAt')
+		}
+		if (!updatedAt && readCount) {
+			query.order('-readCount')
+		}
 		query.limit(10)
 		query.skip(page * 10)
 		query.find().then(res => {
@@ -105,10 +118,12 @@ export const cgp_recommend_all_list = function(Bmob, page) {
 
 /**
  * 根据 tabs 标签查询数据
- * @param  {String} index    tabs 对应的下标
- * @return {Array}           查询的结果
+ * @param  {String} index tabs 对应的下标
+ * @param {Boolean} updatedAt
+ * @param {Boolean} readCount
+ * @return {Array}  查询的结果
  */
-export const cgp_recommend_query_list = function(Bmob, index, page) {
+export const cgp_recommend_query_list = function(Bmob, index, page, updatedAt, readCount) {
 	return new Promise((resolve, reject) => {
 
 		if (cgp_recommend_types[index] == 'ALL') {
@@ -117,8 +132,15 @@ export const cgp_recommend_query_list = function(Bmob, index, page) {
 
 		const query = Bmob.Query('CGP_HotRecommend')
 		query.equalTo("type", "==", cgp_recommend_types[index])
-		// 对createdAt字段降序排列
-		query.order("-createdAt")
+		if (updatedAt && readCount) {
+			query.order('-createdAt', '-readCount')
+		}
+		if (updatedAt && !readCount) {
+			query.order('-createdAt')
+		}
+		if (!updatedAt && readCount) {
+			query.order('-readCount')
+		}
 		query.limit(10)
 		query.skip(page * 10)
 		query.find().then(res => {

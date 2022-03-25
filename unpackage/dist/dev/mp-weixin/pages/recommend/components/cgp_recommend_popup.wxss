@@ -28,7 +28,7 @@
 .popup.data-v-33032b2e {
   position: relative;
   padding-top: 30rpx;
-  width: 530rpx;
+  width: 600rpx;
 }
 .popup image.data-v-33032b2e {
   position: absolute;
@@ -45,15 +45,25 @@
   font-size: 30rpx;
   font-weight: 500;
 }
-.popup .popup_item.data-v-33032b2e {
+.popup .popup-item.data-v-33032b2e {
   float: left;
   padding: 10rpx;
   margin: 0 0 30rpx 30rpx;
-  width: 220rpx;
+  width: 160rpx;
   border-radius: 8rpx;
-  font-size: 30rpx;
+  font-size: 28rpx;
   text-align: center;
   color: #666;
   background: #EBEBEB;
+}
+.popup .popup-bottom.data-v-33032b2e {
+  position: fixed;
+  bottom: 30rpx;
+}
+.popup .popup-bottom-item.data-v-33032b2e {
+  float: left;
+  margin: 0 0 30rpx 30rpx;
+  width: 255rpx;
+  text-align: center;
 }
 

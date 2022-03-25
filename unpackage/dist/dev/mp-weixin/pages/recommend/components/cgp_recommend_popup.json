@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "u-popup": "/uview-ui/components/u-popup/u-popup",
-    "u-gap": "/uview-ui/components/u-gap/u-gap"
+    "u-gap": "/uview-ui/components/u-gap/u-gap",
+    "u-button": "/uview-ui/components/u-button/u-button"
   },
   "component": true
 }

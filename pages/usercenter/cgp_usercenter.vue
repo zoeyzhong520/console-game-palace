@@ -80,7 +80,6 @@
 		onShow() {
 			this.userInfo = this.$store.state.userInfo // 配置用户信息
 			this.isSignIn = !!uni.getStorageSync('signin') && this.isToday(uni.getStorageSync('signin')) // 签到标记
-			console.log('签到标记：',this.isSignIn)
 			this.userLevelColor = this.$store.state.userLevelColor // 等级称号字体颜色
 		},
 

@@ -3,6 +3,7 @@
   "navigationStyle": "custom",
   "usingComponents": {
     "u-navbar": "/uview-ui/components/u-navbar/u-navbar",
-    "u-search": "/uview-ui/components/u-search/u-search"
+    "u-search": "/uview-ui/components/u-search/u-search",
+    "u-tag": "/uview-ui/components/u-tag/u-tag"
   }
 }

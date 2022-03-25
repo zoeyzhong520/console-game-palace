@@ -9,13 +9,11 @@
 
 		<!-- 吸顶 -->
 		<u-tabs class="sticky" :list="tabsList" :current="current" @change="tabsChange"></u-tabs>
-		
 		<!-- Popup 弹出层 -->
-		<screeningPopup :show="show" :array="tabsList" :current="current" @close="show = false" @click="tabsChange" />
+		<screeningPopup :show="show" :array="tabsList" :current="current" @close="show = false" @confirm="filterConfirm" />
 
 		<view v-show="current == 0">
 			<u-gap height="118" bg-color="#fff"></u-gap>
-
 			<!-- 图片轮播 -->
 			<u-swiper :list="bannerList" :title="true" effect3d="true" previousMargin="30rpx" nextMargin="30rpx"
 				bgColor="#fff" @click="swiperClick"></u-swiper>
@@ -69,6 +67,8 @@
 			return {
 				// tabs标签数组
 				tabsList: [],
+				updatedAt: true, // 更新时间
+				readCount: false, // 浏览数量
 				// 当前选中的标签
 				current: 0,
 				// 广告位数据
@@ -176,6 +176,12 @@
 			
 			this.init()
 		},
+		
+		computed: {
+			statusNavBarH() {
+				return uni.getSystemInfoSync().statusBarHeight + 44
+			}
+		},
 
 		methods: {
 			...mapMutations(['setIsInReview', 'setGamesCount', 'setDeviceIdsObjectId', 'setSearchFlag',
@@ -276,7 +282,7 @@
 			// 获取全部推荐
 			getAllRecommendList() {
 				uni.showLoading()
-				cgp_recommend_all_list(this.Bmob, 0).then((res) => {
+				cgp_recommend_all_list(this.Bmob, 0, this.updatedAt, this.readCount).then((res) => {
 					uni.stopPullDownRefresh()
 					uni.hideLoading()
 				
@@ -295,12 +301,29 @@
 					uni.hideLoading()
 				})
 			},
+			
+			// 筛选结果回调
+			filterConfirm(e) {
+				console.log('筛选结果回调: ', JSON.stringify(e))
+				this.updatedAt = e.updatedAt
+				this.readCount = e.readCount
+				this.tabsChange(e.index, true)
+			},
 
-			// tabs 标签切换
-			tabsChange(index) {
+			/**
+			 * @description tabs标签切换
+			 * @param {Number} index 
+			 * @param {Boolean} isFilter 
+			 * */ 
+			tabsChange(index, isFilter = false) {
 				this.current = index;
 				
-				this.filterList(index)
+				// this.filterList(index)
+				if (isFilter) {
+					this.refreshData(false)
+				} else {
+					JSON.stringify(this.allData[cgp_recommend_types[index]]) == '[]' ? this.refreshData(false) : this.list = this.allData[cgp_recommend_types[index]]
+				}
 
 				// 设置标签的滚动位置
 				uni.pageScrollTo({
@@ -320,7 +343,7 @@
 				}
 
 				// 筛选数据
-				cgp_recommend_query_list(this.Bmob, index, 0).then((res) => {
+				cgp_recommend_query_list(this.Bmob, index, 0, this.updatedAt, this.readCount).then((res) => {
 					uni.stopPullDownRefresh()
 
 					this.list = res
@@ -348,7 +371,7 @@
 
 				if (this.current == 0) {
 					// 获取全部推荐数据
-					cgp_recommend_all_list(this.Bmob, page).then((res) => {
+					cgp_recommend_all_list(this.Bmob, page, this.updatedAt, this.readCount).then((res) => {
 						uni.stopPullDownRefresh()
 
 						if (page == 0) {
@@ -372,7 +395,7 @@
 
 				if (this.current > 0) {
 					// 筛选数据
-					cgp_recommend_query_list(this.Bmob, this.current, page).then((res) => {
+					cgp_recommend_query_list(this.Bmob, this.current, page, this.updatedAt, this.readCount).then((res) => {
 						uni.stopPullDownRefresh()
 
 						if (page == 0) {

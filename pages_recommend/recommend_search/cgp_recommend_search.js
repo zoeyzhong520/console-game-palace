@@ -32,3 +32,23 @@ export const recommend_search_all_data = function(Bmob, page) {
 	})
 }
 
+/**
+ * @description 获取本地缓存的搜索记录
+ */ 
+export const getSearchHistory = function() {
+	return !!uni.getStorageSync('searchKeywordsKey') ? uni.getStorageSync('searchKeywordsKey').slice(0,19) : []
+}
+
+/**
+ * @description 把搜索的关键词保存到本地
+ * @param {String} keyword 
+ */ 
+export const saveSearchHistory = function(keyword) {
+	const searchHistory = getSearchHistory()
+	if (!!searchHistory && searchHistory.indexOf(keyword) == -1 && keyword.length > 0) {
+		searchHistory.unshift(keyword) // 插入到数组头部
+		// 搜索记录缓存到本地
+		uni.setStorageSync('searchKeywordsKey', searchHistory)
+	}
+}
+

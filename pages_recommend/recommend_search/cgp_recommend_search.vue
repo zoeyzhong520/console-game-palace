@@ -2,7 +2,7 @@
 	<!-- CGP 筛选页 -->
 	<view class="">
 		<u-navbar :autoBack="true">
-			<u-search class="slot-wrap" placeholder="请输入游戏名称" v-model="keyword" :focus="true" :showAction="true" @custom="startSearch()"
+			<u-search class="slot-wrap" placeholder="请输入游戏名称" v-model="keyword" :focus="false" :showAction="true" @custom="startSearch()"
 				@search="startSearch"></u-search>
 		</u-navbar>
 		
@@ -30,14 +30,15 @@
 <script>
 	import {
 		fuzzyQuery,
-		recommend_search_all_data
+		recommend_search_all_data,
+		saveSearchHistory,
 	} from './cgp_recommend_search.js'
 
 	import {
 		mapMutations
 	} from 'vuex' // 使用Vuex
 
-	const all_data_cached_key = 'cgp_recommend_search_all_data' // 游戏数据
+	const searchKeywordsKey = 'searchKeywordsKey'
 	const allDataPart1CachedKey = 'allDataPart1CachedKey' // 游戏数据第一部分
 	const allDataPart2CachedKey = 'allDataPart2CachedKey' // 游戏数据第二部分
 	const allDataPart3CachedKey = 'allDataPart3CachedKey' // 游戏数据第三部分
@@ -45,7 +46,7 @@
 	export default {
 		watch: {
 			keyword(val) {
-				this.startSearch()
+				// this.startSearch()
 			}
 		},
 
@@ -69,12 +70,13 @@
 			...mapMutations(['setSearchFlag']),
 			
 			// 初始化
-			init() {
-				// 获取今天是X年X月X日
-				this.todayTime = this.$u.timeFormat(new Date().getTime(), 'yyyy-mm-dd hh:MM:ss')
+			async init() {
+				this.todayTime = this.$u.timeFormat(new Date().getTime(), 'yyyy-mm-dd hh:MM:ss') // 获取今天是X年X月X日
 				
 				// 获取全部数据
-				this.getAllData()
+				await this.getAllData()
+				// 开始搜索
+				await this.startSearch()
 			},
 			
 			getAllData() {
@@ -145,7 +147,10 @@
 					return
 				}
 				this.list = fuzzyQuery(this.allData, this.keyword)
-
+				
+				// 保存关键词记录
+				saveSearchHistory(this.keyword)
+				
 				// 更新搜索行为的标识
 				this.setSearchFlag(true)
 			},
