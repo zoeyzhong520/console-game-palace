@@ -3,14 +3,16 @@
 	<view class="container">
 		<u-navbar :is-back="false" :border-bottom="false">
 			<!-- 导航搜索 -->
-			<u-search class="slot-wrap" placeholder="搜索" :showAction="true" action-text="筛选" :disabled="true" @custom="show = true"
+			<u-search class="slot-wrap" placeholder="搜索" :showAction="true" action-text="筛选" :disabled="true"
+				@custom="show = true"
 				@click="$u.route('/pages_recommend/recommend_search/cgp_recommend_searchHistory')"></u-search>
 		</u-navbar>
 
 		<!-- 吸顶 -->
 		<u-tabs class="sticky" :list="tabsList" :current="current" @change="tabsChange"></u-tabs>
 		<!-- Popup 弹出层 -->
-		<screeningPopup :show="show" :array="tabsList" :current="current" @close="show = false" @confirm="filterConfirm" />
+		<screeningPopup :show="show" :array="tabsList" :current="current" @close="show = false"
+			@confirm="filterConfirm" />
 
 		<view v-show="current == 0">
 			<u-gap height="118" bg-color="#fff"></u-gap>
@@ -58,7 +60,7 @@
 	} from 'vuex' // 使用Vuex
 
 	import screeningPopup from './components/cgp_recommend_popup.vue'
-	
+
 	export default {
 		components: {
 			screeningPopup,
@@ -173,10 +175,10 @@
 				// 是否分享打开
 				this.isShare = true
 			}
-			
+
 			this.init()
 		},
-		
+
 		computed: {
 			statusNavBarH() {
 				return uni.getSystemInfoSync().statusBarHeight + 44
@@ -187,30 +189,30 @@
 			...mapMutations(['setIsInReview', 'setGamesCount', 'setDeviceIdsObjectId', 'setSearchFlag',
 				'setArticlesCount'
 			]),
-			
+
 			// 初始化
 			init() {
 				// 获取今天是X年X月X日
 				this.todayTime = this.$u.timeFormat(new Date().getTime(), 'yyyy-mm-dd hh:MM:ss')
-				
+
 				// tabs标签数组
 				this.tabsList = cgp_recommend_tabsList
 				this.tabsList.map((item, index) => {
 					item.isSelect = index == 0 // 默认选中第一项
 				})
-				
+
 				// 显示 tabBar 某一项的右上角的红点
 				uni.showTabBarRedDot({
 					index: 2
 				})
-				
+
 				// HTTP
 				this.upUserInfo(this)
 				this.getConfigs() // 获取配置信息
 				this.insertDeviceId() // 新增一行记录 设备ID
 				this.getBannerAllRecommendList() // 获取全部推荐、广告
 			},
-			
+
 			// 新增一行记录 设备ID
 			insertDeviceId() {
 				cgp_recommend_insert_deviceId(this.Bmob).then(res => {
@@ -236,8 +238,8 @@
 					// 非审核状态，自动打开调试
 					uni.setEnableDebug({
 						enableDebug: !res[0].isInReview
-					}) 
-					
+					})
+
 					this.setIsInReview(res[0].isInReview)
 					this.setGamesCount(res[0].gamesCount)
 					this.setArticlesCount(res[0].articlesCount)
@@ -248,7 +250,7 @@
 						// 本地游戏总数小于服务端，就把本地游戏缓存清空
 						uni.setStorageSync('gamesCount', null)
 					}
-					
+
 					// 缓存文章总数
 					if (!!!uni.getStorageSync('articlesCount')) {
 						uni.setStorageSync('articlesCount', res[0].articlesCount)
@@ -264,13 +266,13 @@
 					}
 				})
 			},
-			
+
 			// 获取广告、全部推荐
 			async getBannerAllRecommendList() {
 				await this.getAllRecommendList()
 				await this.getBannerList()
 			},
-			
+
 			// 获取广告位
 			getBannerList() {
 				cgp_recommend_banner_list(this.Bmob).then((res) => {
@@ -278,16 +280,16 @@
 					this.bannerList = res
 				})
 			},
-			
+
 			// 获取全部推荐
 			getAllRecommendList() {
 				uni.showLoading()
 				cgp_recommend_all_list(this.Bmob, 0, this.updatedAt, this.readCount).then((res) => {
 					uni.stopPullDownRefresh()
 					uni.hideLoading()
-				
+
 					this.list = res
-				
+
 					this.list.map((item) => {
 						// 筛选出3天内更新的游戏
 						if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
@@ -295,68 +297,42 @@
 							item.isNew = true
 						}
 					})
-				
+
 					this.allData.ALL = this.list
 				}).catch(err => {
 					uni.hideLoading()
 				})
 			},
-			
+
 			// 筛选结果回调
 			filterConfirm(e) {
 				console.log('筛选结果回调: ', JSON.stringify(e))
 				this.updatedAt = e.updatedAt
 				this.readCount = e.readCount
-				this.tabsChange(e.index, true)
+				// 把allData置空
+				this.allData = {
+					ALL: [],A: [],B: [],C: [],D: [],E: [],F: [],G: [],H: [],I: [],J: [],K: [],L: [],M: [],N: [],O: [],P: [],Q: [],R: []
+				}
+				this.tabsChange(e.index)
 			},
 
 			/**
 			 * @description tabs标签切换
 			 * @param {Number} index 
-			 * @param {Boolean} isFilter 
-			 * */ 
-			tabsChange(index, isFilter = false) {
+			 * */
+			tabsChange(index) {
 				this.current = index;
-				
-				// this.filterList(index)
-				if (isFilter) {
+
+				if (JSON.stringify(this.allData[cgp_recommend_types[index]]) == '[]') {
 					this.refreshData(false)
 				} else {
-					JSON.stringify(this.allData[cgp_recommend_types[index]]) == '[]' ? this.refreshData(false) : this.list = this.allData[cgp_recommend_types[index]]
+					this.list = this.allData[cgp_recommend_types[index]]
 				}
 
 				// 设置标签的滚动位置
 				uni.pageScrollTo({
 					scrollTop: this.pageScrollArr[cgp_recommend_types[index]],
 					duration: 0
-				})
-			},
-
-			// 筛选列表数据
-			filterList(index) {
-				var type = cgp_recommend_types[index]
-				// console.log(type)
-
-				if (JSON.stringify(this.allData[type]) != '[]') {
-					this.list = this.allData[type]
-					return
-				}
-
-				// 筛选数据
-				cgp_recommend_query_list(this.Bmob, index, 0, this.updatedAt, this.readCount).then((res) => {
-					uni.stopPullDownRefresh()
-
-					this.list = res
-
-					this.list.map((item) => {
-						// 筛选出3天内更新的游戏
-						if (this.dateDifference(item.createdAt, this.todayTime, 'day') <= 3) {
-							// 设置新上架的标识
-							item.isNew = true
-						}
-					})
-
-					this.allData[type] = this.list
 				})
 			},
 

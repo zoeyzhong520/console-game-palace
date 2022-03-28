@@ -65,14 +65,14 @@ export const store = new Vuex.Store({
 		
 		// 用户信息
 		setUserInfo(state, provider) {
-			console.log('用户信息:',provider)
+			// console.log('用户信息:',provider)
 			state.userInfo = provider
 			
 			if (!!state.userInfo) {
 				// 等级称号字体颜色
 				let divisionRes = Math.floor(state.userInfo.signin/30)
 				state.userLevelColor = state.levelColors[divisionRes]
-				console.log('用户称号字体颜色：', state.userLevelColor)
+				// console.log('用户称号字体颜色：', state.userLevelColor)
 			}
 		},
 	}

@@ -86,6 +86,6 @@ export const signinToLevel = function(signin) {
 	   '斗帝·低阶','斗帝·中阶','斗帝·高阶'			// 紫
 	   ]
 	// 换算后的等级称号
-	console.log(divisionRes, levels[divisionRes])
+	// console.log(divisionRes, levels[divisionRes])
 	return levels[divisionRes]
 }

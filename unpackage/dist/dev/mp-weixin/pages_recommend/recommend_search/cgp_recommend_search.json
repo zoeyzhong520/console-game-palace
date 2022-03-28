@@ -4,6 +4,7 @@
   "usingComponents": {
     "u-navbar": "/uview-ui/components/u-navbar/u-navbar",
     "u-search": "/uview-ui/components/u-search/u-search",
-    "u-image": "/uview-ui/components/u-image/u-image"
+    "u-image": "/uview-ui/components/u-image/u-image",
+    "u-loading": "/uview-ui/components/u-loading/u-loading"
   }
 }

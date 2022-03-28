@@ -1,6 +1,6 @@
 <template>
 	<!-- CGP 筛选页 -->
-	<view class="">
+	<view class="search-page">
 		<u-navbar :autoBack="true">
 			<u-search class="slot-wrap" placeholder="请输入游戏名称" v-model="keyword" :focus="false" :showAction="true" @custom="startSearch()"
 				@search="startSearch"></u-search>
@@ -20,6 +20,11 @@
 			<text v-if="item.isNew" class="list-cell-new-tag">New</text>
 			<!-- video标识 -->
 			<text v-if="item.videoPath && item.videoPath.length > 0" class="list-cell-video-tag">▷</text>
+		</view>
+		
+		<!-- LoadingIcon 加载动画 -->
+		<view class="loading" v-if="show">
+			<u-loading :show="show" size="72" color="#2979ff"></u-loading>
 		</view>
 		
 		<!-- 视频广告 -->
@@ -58,6 +63,8 @@
 				list: [],
 				// 全部数据
 				allData: [],
+				// 是否显示加载动画
+				show: false,
 			}
 		},
 
@@ -97,11 +104,8 @@
 
 			callingAPI() {
 				// 目前有2000余部游戏资源，设置自动分页请求
-				uni.showLoading({
-					mask: false
-				})
-
 				// 根据当前游戏总数目计算出需要分页多少
+				this.show = true
 				var maxCount = Math.ceil(this.store.state.gamesCount / 100)
 				// console.log(maxCount)
 				for (var i = 0; i < maxCount; i++) {
@@ -122,9 +126,11 @@
 						uni.setStorageSync(allDataPart2CachedKey, storage2.slice(storage2.length/3,storage2.length/3*2))
 						uni.setStorageSync(allDataPart3CachedKey, storage3.slice(storage3.length/3*2,storage3.length))
 						uni.setStorageSync('gamesCount', this.allData.length)
-
-						if (i == maxCount) {
-							uni.hideLoading()
+						
+						if (this.allData.length == this.store.state.gamesCount) {
+							console.log('HTTP请求结束')
+							this.show = false
+							this.startSearch()							
 						}
 					})
 				}

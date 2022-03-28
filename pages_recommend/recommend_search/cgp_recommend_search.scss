@@ -1,14 +1,25 @@
-.search-history {
-	display: flex;
-	flex-wrap: wrap;
-	padding: 30rpx;
+.search-page {
+	position: relative;
 	
-	&-item {
-		margin-right: 20rpx;
-		margin-bottom: 20rpx;
-	}
-	
-	&-item:last-child {
-		margin-right: 0;
+	.loading {
+		margin-left: 50%;
+		margin-top: 50%;
+		transform: translate(-36rpx);
 	}
 }
+
+.search-history {
+		display: flex;
+		flex-wrap: wrap;
+		padding: 30rpx;
+		
+		&-item {
+			margin-right: 20rpx;
+			margin-bottom: 20rpx;
+		}
+		
+		&-item:last-child {
+			margin-right: 0;
+		}
+	}
+

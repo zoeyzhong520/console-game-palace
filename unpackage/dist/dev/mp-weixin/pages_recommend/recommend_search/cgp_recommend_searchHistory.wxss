@@ -148,6 +148,15 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
+.search-page.data-v-513b59a4 {
+  position: relative;
+}
+.search-page .loading.data-v-513b59a4 {
+  margin-left: 50%;
+  margin-top: 50%;
+  -webkit-transform: translate(-36rpx);
+          transform: translate(-36rpx);
+}
 .search-history.data-v-513b59a4 {
   display: flex;
   flex-wrap: wrap;
