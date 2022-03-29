@@ -192,6 +192,12 @@
 
 			// 初始化
 			init() {
+				// 小程序更新
+				this.mpCheckUpdate()
+				
+				// 判断小程序版本
+				this.mpVersion(this.Bmob)
+				
 				// 获取今天是X年X月X日
 				this.todayTime = this.$u.timeFormat(new Date().getTime(), 'yyyy-mm-dd hh:MM:ss')
 
@@ -235,11 +241,6 @@
 			// 获取配置信息
 			getConfigs() {
 				cgp_configs(this.Bmob).then((res) => {
-					// 非审核状态，自动打开调试
-					uni.setEnableDebug({
-						enableDebug: !res[0].isInReview
-					})
-
 					this.setIsInReview(res[0].isInReview)
 					this.setGamesCount(res[0].gamesCount)
 					this.setArticlesCount(res[0].articlesCount)

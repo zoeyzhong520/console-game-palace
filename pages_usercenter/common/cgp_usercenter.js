@@ -27,7 +27,9 @@ export const userSignIn = function(Bmob, isSignIn) {
 			
 			// 修改一行记录
 			const query = Bmob.Query('_User');
+			uni.showLoading()
 			query.get(userInfo.objectId).then(res => {
+				uni.hideLoading()
 				res.set('level', level)
 				res.set('signin', signin)
 				res.save()

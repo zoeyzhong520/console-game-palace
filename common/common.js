@@ -112,3 +112,67 @@ export const upUserInfo = function(obj) {
 export const isToday = function(str) {
 	return new Date().getTime() - new Date(str).getTime() < 86400000;
 }
+
+/**
+ * @description 判断小程序版本： 1 develop开发版 2 trial体验本 3 release正式版
+ * @param {Bmob} Bmob 
+ * @return {String}
+ */
+export const mpVersion = function(Bmob) {
+	console.log('判断小程序版本: ', __wxConfig.envVersion)
+
+	// 获取小程序版本
+	let version = __wxConfig.envVersion;
+	// 开发版自动打开调试
+	uni.setEnableDebug({
+		enableDebug: version === 'develop'
+	})
+	// Bmob开发版打开调试模式
+	Bmob.debug(version === 'develop')
+	return version
+}
+
+/**
+ * @description 小程序更新
+ */
+export const mpCheckUpdate = function() {
+	// #ifdef MP-WEIXIN 
+	const updateManager = uni.getUpdateManager();
+	updateManager.onCheckForUpdate(function(res) {
+		// 请求完新版本信息的回调
+		if (res.hasUpdate) {
+			updateManager.onUpdateReady(function(obj) {
+				uni.showModal({
+					title: '新版抢先体验',
+					content: '新版本已经准备好，敬请体验',
+					confirmText: '立即体验',
+					success(obj) {
+						if (obj.confirm) {
+							// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+							updateManager.applyUpdate();
+						} else if (obj.cancel) {
+							updateManager.applyUpdate();
+						}
+					}
+				});
+			});
+		}
+	});
+
+	updateManager.onUpdateFailed(function(res) {
+		// 新的版本下载失败
+		uni.showModal({
+			title: '提示',
+			content: '检查到有新版本，但下载失败，请检查网络设置',
+			success(res) {
+				if (res.confirm) {
+					// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+					updateManager.applyUpdate();
+				} else if (res.cancel) {
+					updateManager.applyUpdate();
+				}
+			}
+		});
+	});
+	// #endif
+}
