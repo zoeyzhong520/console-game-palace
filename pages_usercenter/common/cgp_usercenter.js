@@ -20,7 +20,7 @@ export const userSignIn = function(Bmob, isSignIn) {
 			// 用户信息
 			let userInfo = JSON.parse(bmobInfo)
 			// 签到次数加1
-			let signin = userInfo.signin
+			let signin = userInfo.signin || 0
 			signin++
 			// 把签到次数换算成等级称号
 			let level = signinToLevel(signin)
